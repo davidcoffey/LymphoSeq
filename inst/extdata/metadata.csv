@@ -1,0 +1,12 @@
+samples,day,timePoint,phenotype
+TCRB_Day0_Unsorted,0,Pretransplant,Unsorted
+TCRB_Day32_Unsorted,32,1 Month,Unsorted
+TCRB_Day83_Unsorted,83,3 Months,Unsorted
+TCRB_Day83_CD8_CMV,83,3 Months,CD8+CMV+
+TCRB_Day369_Unsorted,369,1 Year,Unsorted
+TCRB_Day369_CD8_CMV,369,1 Year,CD8+CMV+
+TCRB_Day949_Unsorted,949,2 Years,Unsorted
+TCRB_Day949_CD4,949,2 Years,CD4+
+TCRB_Day949_CD8,949,2 Years,CD8+
+TCRB_Day1320_Unsorted,1320,3 Years,Unsorted
+TCRB_Day1320_CD8_CMV,1320,3 Years,CD8+CMV+
