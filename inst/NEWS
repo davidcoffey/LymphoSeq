@@ -1,1 +1,7 @@
 LymphoSeq News
+
+Version 1.1.0 [May 10, 2016]
+ * Added function alignSeq
+ * Added funciton phyloSeq
+ * Added function exportFasta
+ * Added function differentialAbundance

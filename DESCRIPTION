@@ -10,7 +10,8 @@ Description: This R package analyzes high-throughput sequencing of T
         exported from the ImmunoSEQ analyzer.
 Depends: R (>= 3.2), LymphoSeqDB
 Imports: data.table, plyr, dplyr, reshape, VennDiagram, ggplot2, ineq,
-        RColorBrewer, circlize, grid, utils, stats
+        RColorBrewer, circlize, grid, utils, stats, ggtree, msa, Biostrings,
+        phangorn, doMC
 License: Artistic-2.0
 LazyData: true
 RoxygenNote: 5.0.1
