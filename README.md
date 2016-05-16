@@ -37,8 +37,8 @@ biocLite()
 install.packages("devtools")
 
 # Download package from GitHub
-install_github("davidcoffey/LymphoSeqDB")
-install_github("davidcoffey/LymphoSeq")
+devtools::install_github("davidcoffey/LymphoSeqDB")
+devtools::install_github("davidcoffey/LymphoSeq")
 ```
 
 ### Documentation
