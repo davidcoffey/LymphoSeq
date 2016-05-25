@@ -41,7 +41,7 @@
 #' @import ggtree
 #' @import ggplot2
 #' @importFrom phangorn NJ
-phyloTree <- function(list, sample, type = "nucleotide", layout = "rectangular") {
+phyloTree <- function(list, sample, type = "nucleotide", layout = "rectangular", label = TRUE) {
     file <- list[[sample]]
     if(length(grep(pattern = "vFamilyName|dFamilyName|jFamilyName|count", names(file))) != 4){
         stop("vFamilyName, dFamilyName, jFamilyName, nucleotide, and count are required columns.  Try aggregating the sequences by 'nucleotide' usng the function productiveSeq.", call. = FALSE)
@@ -75,8 +75,10 @@ phyloTree <- function(list, sample, type = "nucleotide", layout = "rectangular")
         ggtree::geom_tippoint(aes(color = geneFamilies, shape = dominant), size = 3) + 
         ggplot2::scale_color_manual(values = getPalette(length(unique(geneFamilies)))) + 
         ggplot2::guides(shape = FALSE) + 
-        ggplot2::geom_text(aes(label=count), hjust = -0.5, size = 2.5, na.rm = TRUE) +
         ggplot2::theme(legend.position = "bottom", legend.key = element_rect(colour = "white")) + 
         ggplot2::labs(color = "")
+    if(label == TRUE){
+        plot <- plot + ggplot2::geom_text(aes(label=count), nudge_x = 0.5, hjust = 0, size = 2.5, na.rm = TRUE, check_overlap = TRUE)
+    }
     return(plot)
 }
