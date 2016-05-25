@@ -46,6 +46,7 @@
 #' file.list <- readImmunoSeq(path = file.path, 
 #'                            columns = c("aminoAcid", "nucleotide", "count", 
 #'                                      "count (templates)", "count (reads)", 
+#'                                      "count (templates/reads)",
 #'                                      "frequencyCount", "frequencyCount (%)", 
 #'                                      "estimatedNumberGenomes"), 
 #'                            recursive = FALSE)

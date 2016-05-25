@@ -11,7 +11,7 @@ Description: This R package analyzes high-throughput sequencing of T
 Depends: R (>= 3.2), LymphoSeqDB
 Imports: data.table, plyr, dplyr, reshape, VennDiagram, ggplot2, ineq,
         RColorBrewer, circlize, grid, utils, stats, ggtree, msa, Biostrings,
-        phangorn, doMC
+        phangorn, doMC, stringdist
 License: Artistic-2.0
 LazyData: true
 RoxygenNote: 5.0.1

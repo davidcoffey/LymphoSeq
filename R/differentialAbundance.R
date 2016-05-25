@@ -66,7 +66,7 @@ differentialAbundance <- function(sample1, sample2, list, abundance = "estimated
         not.x <- sum(x[, abundance]) - in.x
         not.y <- sum(y[, abundance]) - in.y
         matrix <- matrix(c(in.x, in.y, not.x, not.y), nrow = 2)
-        fisher <- stats::fisher.test(matrix)
+        fisher <- stats::fisher.test(matrix, workspace = 2e6)
         p.value <- c(p.value, fisher$p.value)
         sample1.freq <- c(sample1.freq, x.freq)
         sample2.freq <- c(sample2.freq, y.freq)
