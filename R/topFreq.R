@@ -42,10 +42,12 @@ topFreq <- function(productive.aa, percent = 0.1) {
     }
     frequencyCount <- NULL
     aminoAcid <- NULL
-    top.list <- plyr::llply(productive.aa, function(x) 
+    top.seqs <- plyr::llply(productive.aa, function(x) 
         subset(x, frequencyCount >= percent, 
-               select = c(aminoAcid, frequencyCount)))
-    top.merged <- Reduce(rbind, top.list)
+               select = aminoAcid))
+    top.seqs <- Reduce(rbind, top.seqs)
+    top.merged <- Reduce(rbind, productive.aa)
+    top.merged <- top.merged[top.merged$aminoAcid %in% unique(top.seqs$aminoAcid), ]
     top.grouped <- dplyr::group_by(top.merged, aminoAcid)
     top.table <- data.frame(dplyr::summarise(top.grouped, 
                                              min(frequencyCount), 
@@ -58,12 +60,12 @@ topFreq <- function(productive.aa, percent = 0.1) {
                                  top.table$meanFrequency, 
                                  decreasing = TRUE), ]
     top.table$prevalence <- LymphoSeqDB::prevalenceTRB[match(top.table$aminoAcid, 
-                                                               LymphoSeqDB::prevalenceTRB$aminoAcid), 
-                                          "prevalence"]
+                                                             LymphoSeqDB::prevalenceTRB$aminoAcid), 
+                                                       "prevalence"]
     top.table$prevalence[is.na(top.table$prevalence)] <- 0
     top.table$antigen <- as.character(LymphoSeqDB::publishedTRB[match(top.table$aminoAcid, 
-                                                         LymphoSeqDB::publishedTRB$aminoAcid), 
-                                                   "antigen"])
+                                                                      LymphoSeqDB::publishedTRB$aminoAcid), 
+                                                                "antigen"])
     top.table <- replace(top.table, is.na(top.table), "")
     return(top.table)
-} 
+}
