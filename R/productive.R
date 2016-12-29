@@ -30,39 +30,41 @@
 productive <- function(sample, aggregate = "aminoAcid") {
     productive.seqs <- sample[which(sample[, "aminoAcid"] != "" &
                                         !grepl("\\*", sample[, "aminoAcid"])), ]
-    if (any(grepl("estimatedNumberGenomes", colnames(productive.seqs)))) {
-        if (aggregate == "aminoAcid") {
-            count <- aggregate(count ~ aminoAcid, data = productive.seqs, FUN = sum)
-            productive.seqs$estimatedNumberGenomes[is.na(productive.seqs$estimatedNumberGenomes)] <- 0
-            estimatedNumberGenomes <- aggregate(estimatedNumberGenomes ~ aminoAcid, 
-                                                data = productive.seqs, FUN = sum)
-            merged <- merge(count, estimatedNumberGenomes, by = "aminoAcid")
-            merged$frequencyCount <- merged$count/sum(count$count) * 100
+    if(nrow(productive.seqs) != 0){
+        if (any(grepl("estimatedNumberGenomes", colnames(productive.seqs)))) {
+            if (aggregate == "aminoAcid") {
+                count <- aggregate(count ~ aminoAcid, data = productive.seqs, FUN = sum)
+                productive.seqs$estimatedNumberGenomes[is.na(productive.seqs$estimatedNumberGenomes)] <- 0
+                estimatedNumberGenomes <- aggregate(estimatedNumberGenomes ~ aminoAcid, 
+                                                    data = productive.seqs, FUN = sum)
+                merged <- merge(count, estimatedNumberGenomes, by = "aminoAcid")
+                merged$frequencyCount <- merged$count/sum(count$count) * 100
+            }
+            if (aggregate == "nucleotide") {
+                count <- aggregate(count ~ nucleotide, data = productive.seqs, FUN = sum)
+                productive.seqs$estimatedNumberGenomes[is.na(productive.seqs$estimatedNumberGenomes)] <- 0
+                estimatedNumberGenomes <- aggregate(estimatedNumberGenomes ~ nucleotide, 
+                                                    data = productive.seqs, FUN = sum)
+                productive.seqs$count <- NULL
+                productive.seqs$estimatedNumberGenomes <- NULL
+                merged <- Reduce(function(x, y) merge(x, y, by = "nucleotide"), 
+                                 list(productive.seqs, count, estimatedNumberGenomes))
+                merged$frequencyCount <- merged$count/sum(count$count) * 100
+            }
+        } else {
+            if (aggregate == "aminoAcid") {
+                merged <- aggregate(count ~ aminoAcid, data = productive.seqs, FUN = sum)
+                merged$frequencyCount <- merged$count/sum(merged$count) * 100
+            }
+            if (aggregate == "nucleotide") {
+                count <- aggregate(count ~ nucleotide, data = productive.seqs, FUN = sum)
+                productive.seqs$count <- NULL
+                merged <- merge(productive.seqs, count, by = "nucleotide")
+                merged$frequencyCount <- merged$count/sum(merged$count) * 100
+            }
         }
-        if (aggregate == "nucleotide") {
-            count <- aggregate(count ~ nucleotide, data = productive.seqs, FUN = sum)
-            productive.seqs$estimatedNumberGenomes[is.na(productive.seqs$estimatedNumberGenomes)] <- 0
-            estimatedNumberGenomes <- aggregate(estimatedNumberGenomes ~ nucleotide, 
-                                                data = productive.seqs, FUN = sum)
-            productive.seqs$count <- NULL
-            productive.seqs$estimatedNumberGenomes <- NULL
-            merged <- Reduce(function(x, y) merge(x, y, by = "nucleotide"), 
-                             list(productive.seqs, count, estimatedNumberGenomes))
-            merged$frequencyCount <- merged$count/sum(count$count) * 100
-        }
-    } else {
-        if (aggregate == "aminoAcid") {
-            merged <- aggregate(count ~ aminoAcid, data = productive.seqs, FUN = sum)
-            merged$frequencyCount <- merged$count/sum(merged$count) * 100
-        }
-        if (aggregate == "nucleotide") {
-            count <- aggregate(count ~ nucleotide, data = productive.seqs, FUN = sum)
-            productive.seqs$count <- NULL
-            merged <- merge(productive.seqs, count, by = "nucleotide")
-            merged$frequencyCount <- merged$count/sum(merged$count) * 100
-        }
+        merged <- merged[order(merged$frequencyCount, decreasing = TRUE), intersect(names(sample), names(merged))]
+        rownames(merged) <- NULL
+        return(merged)
     }
-    merged <- merged[order(merged$frequencyCount, decreasing = TRUE), intersect(names(sample), names(merged))]
-    rownames(merged) <- NULL
-    return(merged)
 } 
