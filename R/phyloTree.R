@@ -66,8 +66,8 @@ phyloTree <- function(list, sample, type = "nucleotide", layout = "rectangular",
     geneFamilies <- paste(file$vFamilyName, file$dFamilyName, file$jFamilyName)
     geneFamilies <- gsub(geneFamilies, pattern = "IGH|IGL|IGK|TCRB|TCRA", replacement = "")
     geneFamilies <- gsub(geneFamilies, pattern = "unresolved", replacement = "UNR")
-    tree.annotation <- data.frame(names = names, estimatedNumberGenomes = file$estimatedNumberGenomes, 
-                                  count = file$count, geneFamilies = geneFamilies, aminoAcid = file$aminoAcid,
+    tree.annotation <- data.frame(names = names, count = file$count, 
+                                  geneFamilies = geneFamilies, aminoAcid = file$aminoAcid,
                                   frequencyCount = round(file$frequencyCount, digits = 2), 
                                   dominant = c("Yes", rep("No", nrow(file) - 1)))
     getPalette <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(9, "Set1"))
