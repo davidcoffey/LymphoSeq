@@ -48,7 +48,7 @@ clonality <- function(file.list) {
         total.count <- sum(file$count)
         productive <- file[!grepl("\\*", file$aminoAcid) & file$aminoAcid != "", ]
         frequency <- productive$count/sum(productive$count)
-        entropy <- -sum(frequency * log2(frequency))
+        entropy <- -sum(frequency * log2(frequency), na.rm = TRUE)
         unique.productive <- length(productive$nucleotide)
         clonality <- 1 - round(entropy/log2(unique.productive), digits = 6)
         table$totalSequences[i] <- total.reads
