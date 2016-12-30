@@ -50,7 +50,7 @@ clonality <- function(file.list) {
         frequency <- productive$count/sum(productive$count)
         entropy <- -sum(frequency * log2(frequency))
         unique.productive <- length(productive$nucleotide)
-        clonality <- 1 - (entropy/log2(unique.productive))
+        clonality <- 1 - round(entropy/log2(unique.productive), digits = 6)
         table$totalSequences[i] <- total.reads
         table$uniqueProductiveSequences[i] <- unique.productive
         table$totalGenomes[i] <- total.genomes
