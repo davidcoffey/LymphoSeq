@@ -44,6 +44,7 @@ clonality <- function(file.list) {
     for (i in 1:length(file.list)) {
         file <- file.list[[i]]
         total.reads <- length(file$nucleotide)
+        file$estimatedNumberGenomes <- suppressWarnings(as.integer(file$estimatedNumberGenomes))
         total.genomes <- sum(file$estimatedNumberGenomes)
         total.count <- sum(file$count)
         productive <- file[!grepl("\\*", file$aminoAcid) & file$aminoAcid != "", ]
