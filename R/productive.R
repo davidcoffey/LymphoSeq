@@ -34,6 +34,7 @@ productive <- function(sample, aggregate = "aminoAcid") {
         if (any(grepl("estimatedNumberGenomes", colnames(productive.seqs)))) {
             if (aggregate == "aminoAcid") {
                 count <- aggregate(count ~ aminoAcid, data = productive.seqs, FUN = sum)
+                productive.seqs$estimatedNumberGenomes <- suppressWarnings(as.integer(productive.seqs$estimatedNumberGenomes))
                 productive.seqs$estimatedNumberGenomes[is.na(productive.seqs$estimatedNumberGenomes)] <- 0
                 estimatedNumberGenomes <- aggregate(estimatedNumberGenomes ~ aminoAcid, 
                                                     data = productive.seqs, FUN = sum)
@@ -42,6 +43,7 @@ productive <- function(sample, aggregate = "aminoAcid") {
             }
             if (aggregate == "nucleotide") {
                 count <- aggregate(count ~ nucleotide, data = productive.seqs, FUN = sum)
+                productive.seqs$estimatedNumberGenomes <- suppressWarnings(as.integer(productive.seqs$estimatedNumberGenomes))
                 productive.seqs$estimatedNumberGenomes[is.na(productive.seqs$estimatedNumberGenomes)] <- 0
                 estimatedNumberGenomes <- aggregate(estimatedNumberGenomes ~ nucleotide, 
                                                     data = productive.seqs, FUN = sum)
