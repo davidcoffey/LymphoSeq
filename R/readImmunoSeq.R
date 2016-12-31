@@ -70,11 +70,11 @@ readImmunoSeq <- function(path, columns = c("aminoAcid", "nucleotide", "count",
         warning("One or more of the files you are trying to import has no sequences and will be ignored.", call. = FALSE)
     }
     if (any(columns == "all")) {
-        file.list <- plyr::llply(file.paths2, data.table::fread, 
-                                 data.table = FALSE, .progress = "text")
+        file.list <- suppressWarnings(plyr::llply(file.paths2, data.table::fread, 
+                                 data.table = FALSE, .progress = "text"))
     } else {
-        file.list <- plyr::llply(file.paths2, data.table::fread, select = columns, 
-                                 data.table = FALSE, .progress = "text")
+        file.list <- suppressWarnings(plyr::llply(file.paths2, data.table::fread, select = columns, 
+                                 data.table = FALSE, .progress = "text"))
         if(length(unique(plyr::llply(file.list, ncol))) > 1){
             warning("One or more of the files you are trying to import do not contain all the columns you specified.", call. = FALSE)
         }
