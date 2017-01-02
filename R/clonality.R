@@ -44,13 +44,14 @@ clonality <- function(file.list) {
     for (i in 1:length(file.list)) {
         file <- file.list[[i]]
         total.reads <- length(file$nucleotide)
+        file$estimatedNumberGenomes <- suppressWarnings(as.integer(file$estimatedNumberGenomes))
         total.genomes <- sum(file$estimatedNumberGenomes)
         total.count <- sum(file$count)
         productive <- file[!grepl("\\*", file$aminoAcid) & file$aminoAcid != "", ]
         frequency <- productive$count/sum(productive$count)
-        entropy <- -sum(frequency * log2(frequency))
+        entropy <- -sum(frequency * log2(frequency), na.rm = TRUE)
         unique.productive <- length(productive$nucleotide)
-        clonality <- 1 - (entropy/log2(unique.productive))
+        clonality <- 1 - round(entropy/log2(unique.productive), digits = 6)
         table$totalSequences[i] <- total.reads
         table$uniqueProductiveSequences[i] <- unique.productive
         table$totalGenomes[i] <- total.genomes
