@@ -19,10 +19,10 @@
 #' names are the same as used by ImmunoSEQ files.  Available column headings in 
 #' ImmunoSEQ files are:  
 #' "nucleotide", "aminoAcid", "count", "count (templates)", "count (reads)", 
-#' "frequencyCount", "frequencyCount (\%)", "cdr3Length", "vMaxResolved", 
-#' "vFamilyName", "vGeneName", "vGeneAllele", "vFamilyTies", "vGeneNameTies", 
-#' "vGeneAlleleTies", "dMaxResolved", "dFamilyName", "dGeneName", "dGeneAllele",
-#' "dFamilyTies", "dGeneNameTies", "dGeneAlleleTies", "jMaxResolved", 
+#' "count (templates/reads)", "frequencyCount", "frequencyCount (\%)", "cdr3Length", 
+#' "vMaxResolved", "vFamilyName", "vGeneName", "vGeneAllele", "vFamilyTies", 
+#' "vGeneNameTies", "vGeneAlleleTies", "dMaxResolved", "dFamilyName", "dGeneName", 
+#' "dGeneAllele", "dFamilyTies", "dGeneNameTies", "dGeneAlleleTies", "jMaxResolved", 
 #' "jFamilyName", "jGeneName", "jGeneAllele", "jFamilyTies", "jGeneNameTies", 
 #' "jGeneAlleleTies", "vDeletion", "d5Deletion", "d3Deletion", "jDeletion", 
 #' "n2Insertion", "n1Insertion", "vIndex", "n2Index", "dIndex", "n1Index", 
@@ -46,6 +46,7 @@
 #' file.list <- readImmunoSeq(path = file.path, 
 #'                            columns = c("aminoAcid", "nucleotide", "count", 
 #'                                      "count (templates)", "count (reads)", 
+#'                                      "count (templates/reads)",
 #'                                      "frequencyCount", "frequencyCount (%)", 
 #'                                      "estimatedNumberGenomes"), 
 #'                            recursive = FALSE)
@@ -54,25 +55,31 @@
 #' @importFrom plyr llply
 readImmunoSeq <- function(path, columns = c("aminoAcid", "nucleotide", "count", 
                                             "count (templates)", "count (reads)", 
+                                            "count (templates/reads)",
                                             "frequencyCount", "frequencyCount (%)", 
                                             "estimatedNumberGenomes", "vFamilyName", 
                                             "dFamilyName", "jFamilyName","vGeneName", 
                                             "dGeneName", "jGeneName"), 
                           recursive = FALSE) {
-    file.paths <- list.files(path, full.names = TRUE, all.files = FALSE, 
+    file.paths1 <- list.files(path, full.names = TRUE, all.files = FALSE, 
                              recursive = recursive, pattern = ".tsv", 
                              include.dirs = FALSE)
+    file.info <- file.info(file.paths1)
+    file.paths2 <- rownames(file.info)[file.info$size > 0]
+    if(!identical(file.paths1,file.paths2)){
+        warning("One or more of the files you are trying to import has no sequences and will be ignored.", call. = FALSE)
+    }
     if (any(columns == "all")) {
-        file.list <- plyr::llply(file.paths, data.table::fread, 
-                                 data.table = FALSE, .progress = "text")
+        file.list <- suppressWarnings(plyr::llply(file.paths2, data.table::fread, 
+                                 data.table = FALSE, .progress = "text"))
     } else {
-        file.list <- plyr::llply(file.paths, data.table::fread, select = columns, 
-                                 data.table = FALSE, .progress = "text")
+        file.list <- suppressWarnings(plyr::llply(file.paths2, data.table::fread, select = columns, 
+                                 data.table = FALSE, .progress = "text"))
         if(length(unique(plyr::llply(file.list, ncol))) > 1){
             warning("One or more of the files you are trying to import do not contain all the columns you specified.", call. = FALSE)
         }
     }
-    file.names <- gsub(".tsv", "", basename(file.paths))
+    file.names <- gsub(".tsv", "", basename(file.paths2))
     names(file.list) <- file.names
     i <- 1
     for (i in 1:length(file.list)) {

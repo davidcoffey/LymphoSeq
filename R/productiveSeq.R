@@ -58,8 +58,8 @@ productiveSeq <- function(file.list, aggregate = "aminoAcid", prevalence = FALSE
             productive.list.prevalence <- c(productive.list.prevalence, list(file))
         }
         names(productive.list.prevalence) <- names(productive.list)
-        return(productive.list.prevalence)
+        return(productive.list.prevalence[lapply(productive.list.prevalence,length) > 0])
     } else {
-        return(productive.list)
+        return(productive.list[lapply(productive.list,length) > 0])
     }
 } 
