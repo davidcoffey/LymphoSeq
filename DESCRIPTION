@@ -15,7 +15,7 @@ Imports: data.table, plyr, dplyr, reshape, VennDiagram, ggplot2, ineq,
 License: Artistic-2.0
 LazyData: true
 RoxygenNote: 5.0.1
-Suggests: knitr, pheatmap, wordcloud
+Suggests: knitr, pheatmap, wordcloud, rmarkdown
 VignetteBuilder: knitr
 biocViews: Software, Technology, Sequencing, TargetedResequencing
 NeedsCompilation: no
