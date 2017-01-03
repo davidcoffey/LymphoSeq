@@ -56,7 +56,6 @@ clonality <- function(file.list) {
         table$uniqueProductiveSequences[i] <- unique.productive
         table$totalGenomes[i] <- total.genomes
         table$totalCount[i] <- total.count
-        table$entropy[i] <- entropy
         table$clonality[i] <- clonality
         table$giniCoefficient[i] <- ineq::Gini(frequency)
         table$topProductiveSequence[i] <- max(frequency) * 100
