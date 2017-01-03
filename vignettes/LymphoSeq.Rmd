@@ -10,10 +10,6 @@ output:
     df_print: paged
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(cache = TRUE)
-```
-
 Application of high-throughput sequencing of T and B lymphocyte antigen receptors has great potential for improving the monitoring of lymphoid malignancies, assessing immune reconstitution after hematopoietic stem cell transplantation, and characterizing the composition of lymphocyte repertoires [(Warren, E. H. *et al. Blood* 2013;122:19–22)](https://www.ncbi.nlm.nih.gov/pubmed/?term=23656731)   LymhoSeq is an R package designed to import, analyze, and visualize antigen receptor sequencing from [Adaptive Biotechnologies' ImmunoSEQ assay](http://www.adaptivebiotech.com/immunoseq).  The package is also adaptable to the analysis of T and B cell receptor sequencing processed using other platforms such as [MiXCR](https://milaboratory.com/software/mixcr/) or [IMGT/HighV-QUEST](http://www.imgt.org/HighV-QUEST).  This vignette has been written to highlight some of the features of LymphoSeq and guide the user through a typical workflow.
 
 ## Importing data
