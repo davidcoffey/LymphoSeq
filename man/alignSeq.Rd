@@ -33,7 +33,7 @@ file.list <- readImmunoSeq(path = file.path)
 
 productive.nt <- productiveSeq(file.list = file.list, aggregate = "nucleotide")
 
-alignSeq(list = productive.nt, sample = "TCRB_Day1320_CD8_CMV", type = "nucleotide", 
+alignSeq(list = productive.nt, sample = "TRB_Unsorted_1320", type = "nucleotide", 
          method = "ClustalW")
 }
 

@@ -22,11 +22,11 @@
 #' 
 #' productive.aa <- productiveSeq(file.list = file.list, aggregate = "aminoAcid")
 #' 
-#' commonSeqsPlot("TCRB_Day32_Unsorted", "TCRB_Day83_Unsorted", 
+#' commonSeqsPlot("TRB_Unsorted_32", "TRB_Unsorted_83", 
 #'    productive.aa = productive.aa)
 #' 
 #' # Change the X and Y axises to log-10 scale
-#' commonSeqsPlot("TCRB_Day32_Unsorted", "TCRB_Day83_Unsorted", 
+#' commonSeqsPlot("TRB_Unsorted_32", "TRB_Unsorted_83", 
 #'    productive.aa = productive.aa) +
 #'    ggplot2::scale_x_log10() + 
 #'    ggplot2::scale_y_log10() + 

@@ -4,7 +4,8 @@
 \alias{phyloTree}
 \title{Create phylogenetic tree}
 \usage{
-phyloTree(list, sample, type = "nucleotide", layout = "rectangular")
+phyloTree(list, sample, type = "nucleotide", layout = "rectangular",
+  label = TRUE)
 }
 \arguments{
 \item{list}{A list data frames of unproductive nucleotide sequences or productive 
@@ -19,6 +20,8 @@ should be compared.}
 
 \item{layout}{A character vector indicating the tree layout.  Options include 
 "rectangular", "slanted", "fan", "circular", "radial" and "unrooted".}
+
+\item{label}{A boolean indicating if the sequencing count should be shown next to the leaves.}
 }
 \value{
 Returns a phylogenetic tree where each leaf represents a sequence color coded by the
@@ -31,22 +34,22 @@ Create a phylogenetic tree using neighbor joining tree estimation for amino acid
 nucleotide CDR3 sequences in a list of data frames.
 }
 \examples{
-file.path <- system.file("extdata", "TCRB_sequencing", package = "LymphoSeq")
+file.path <- system.file("extdata", "IGH_sequencing", package = "LymphoSeq")
 
 file.list <- readImmunoSeq(path = file.path)
 
 productive.nt <- productiveSeq(file.list = file.list, aggregate = "nucleotide")
 
-phyloTree(list = productive.nt, sample = "TCRB_Day1320_CD8_CMV", type = "nucleotide", 
+phyloTree(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "nucleotide", 
          layout = "rectangular")
 
-phyloTree(list = productive.nt, sample = "TCRB_Day1320_CD8_CMV", type = "aminoAcid", 
+phyloTree(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "aminoAcid", 
          layout = "circular")
          
 # Add scale and title to figure
 library(ggtree)
 library(ggplot2)
-phyloTree(list = productive.nt, sample = "TCRB_Day1320_CD8_CMV", type = "aminoAcid", 
+phyloTree(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "aminoAcid", 
          layout = "rectangular") +
          ggtree::theme_tree2() +
          ggplot2::theme(legend.position = "right", legend.key = element_rect(colour = "white")) +

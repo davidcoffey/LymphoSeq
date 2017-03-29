@@ -43,8 +43,8 @@ productive.aa <- productiveSeq(file.list = file.list, aggregate = "aminoAcid")
 lorenzCurve(samples = names(productive.aa), list = productive.aa)
 
 # Change the legend labels, line colors, and add a title
-samples <- c("TCRB_Day0_Unsorted", "TCRB_Day32_Unsorted", 
-   "TCRB_Day83_Unsorted", "TCRB_Day949_Unsorted", "TCRB_Day1320_Unsorted")
+samples <- c("TRB_Unsorted_0", "TRB_Unsorted_32", 
+   "TRB_Unsorted_83", "TRB_Unsorted_949", "TRB_Unsorted_1320")
 
 lorenz.curve <- lorenzCurve(samples = samples, list = productive.aa)
 
