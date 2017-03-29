@@ -35,7 +35,7 @@ file.path <- system.file("extdata", "TCRB_sequencing", package = "LymphoSeq")
 
 file.list <- readImmunoSeq(path = file.path)
 
-productive <- productive(sample = file.list[["TCRB_Day32_Unsorted"]], aggregate = "aminoAcid")
+productive <- productive(sample = file.list[["TRB_Unsorted_32"]], aggregate = "aminoAcid")
 }
 \seealso{
 \code{\link{productiveSeq}}

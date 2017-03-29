@@ -28,7 +28,7 @@ file.list <- readImmunoSeq(path = file.path)
 
 productive.aa <- productiveSeq(file.list = file.list, aggregate = "aminoAcid")
 
-commonSeqs(samples = c("TCRB_Day0_Unsorted", "TCRB_Day32_Unsorted"), 
+commonSeqs(samples = c("TRB_Unsorted_0", "TRB_Unsorted_32"), 
    productive.aa = productive.aa)
 }
 \seealso{

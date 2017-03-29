@@ -18,18 +18,18 @@
 #' productive.aa <- productiveSeq(file.list = file.list, aggregate = "aminoAcid")
 #' 
 #' # Plot a triple Venn diagram
-#' commonSeqsVenn(samples = c("TCRB_Day0_Unsorted", 
-#'    "TCRB_Day32_Unsorted", "TCRB_Day83_Unsorted"), 
+#' commonSeqsVenn(samples = c("TRB_Unsorted_0", 
+#'    "TRB_Unsorted_32", "TRB_Unsorted_83"), 
 #'    productive.seqs = productive.aa)
 #' 
 #' # Plot a double Venn diagram
-#' commonSeqsVenn(samples = c("TCRB_Day0_Unsorted", 
-#'    "TCRB_Day32_Unsorted"), productive.seqs = productive.aa)
+#' commonSeqsVenn(samples = c("TRB_Unsorted_0", 
+#'    "TRB_Unsorted_32"), productive.seqs = productive.aa)
 #' 
 #' # Save Venn diagram as a .png file to working directory
 #' png(filename = "Venn diagram.png", res = 300, units = "in", height = 5, width = 5)
 #' 
-#' commonSeqsVenn(samples = c("TCRB_Day0_Unsorted", "TCRB_Day32_Unsorted"), 
+#' commonSeqsVenn(samples = c("TRB_Unsorted_0", "TRB_Unsorted_32"), 
 #'    productive.seqs = productive.aa)
 #' 
 #' dev.off()

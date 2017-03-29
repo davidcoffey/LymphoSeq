@@ -17,7 +17,7 @@
 #' 
 #' productive.aa <- productiveSeq(file.list, aggregate = "aminoAcid")
 #' 
-#' similarityScore(productive.aa[["TCRB_Day32_Unsorted"]], productive.aa[["TCRB_Day83_Unsorted"]])
+#' similarityScore(productive.aa[["TRB_Unsorted_32"]], productive.aa[["TRB_Unsorted_83"]])
 #' @seealso \code{\link{similarityMatrix}}
 #' @export
 similarityScore <- function(sample1, sample2) {

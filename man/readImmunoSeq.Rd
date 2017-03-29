@@ -5,9 +5,10 @@
 \title{Read ImmunoSeq files}
 \usage{
 readImmunoSeq(path, columns = c("aminoAcid", "nucleotide", "count",
-  "count (templates)", "count (reads)", "frequencyCount", "frequencyCount (\%)",
-  "estimatedNumberGenomes", "vFamilyName", "dFamilyName", "jFamilyName",
-  "vGeneName", "dGeneName", "jGeneName"), recursive = FALSE)
+  "count (templates)", "count (reads)", "count (templates/reads)",
+  "frequencyCount", "frequencyCount (\%)", "estimatedNumberGenomes",
+  "vFamilyName", "dFamilyName", "jFamilyName", "vGeneName", "dGeneName",
+  "jGeneName"), recursive = FALSE)
 }
 \arguments{
 \item{path}{Path to the directory containing tab-delimited files.  Only 
@@ -38,10 +39,10 @@ sequencing from other sources (e.g. miTCR or miXCR) as long as the column
 names are the same as used by ImmunoSEQ files.  Available column headings in 
 ImmunoSEQ files are:  
 "nucleotide", "aminoAcid", "count", "count (templates)", "count (reads)", 
-"frequencyCount", "frequencyCount (\%)", "cdr3Length", "vMaxResolved", 
-"vFamilyName", "vGeneName", "vGeneAllele", "vFamilyTies", "vGeneNameTies", 
-"vGeneAlleleTies", "dMaxResolved", "dFamilyName", "dGeneName", "dGeneAllele",
-"dFamilyTies", "dGeneNameTies", "dGeneAlleleTies", "jMaxResolved", 
+"count (templates/reads)", "frequencyCount", "frequencyCount (\%)", "cdr3Length", 
+"vMaxResolved", "vFamilyName", "vGeneName", "vGeneAllele", "vFamilyTies", 
+"vGeneNameTies", "vGeneAlleleTies", "dMaxResolved", "dFamilyName", "dGeneName", 
+"dGeneAllele", "dFamilyTies", "dGeneNameTies", "dGeneAlleleTies", "jMaxResolved", 
 "jFamilyName", "jGeneName", "jGeneAllele", "jFamilyTies", "jGeneNameTies", 
 "jGeneAlleleTies", "vDeletion", "d5Deletion", "d3Deletion", "jDeletion", 
 "n2Insertion", "n1Insertion", "vIndex", "n2Index", "dIndex", "n1Index", 
