@@ -23,7 +23,7 @@
 #' 
 #' file.list <- readImmunoSeq(path = file.path)
 #' 
-#' productive <- productive(sample = file.list[["TCRB_Day32_Unsorted"]], aggregate = "aminoAcid")
+#' productive <- productive(sample = file.list[["TRB_Unsorted_32"]], aggregate = "aminoAcid")
 #' @seealso \code{\link{productiveSeq}}
 #' @export
 #' @importFrom stats aggregate
