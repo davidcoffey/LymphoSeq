@@ -58,7 +58,7 @@ cloneTrack(sequence.matrix = sequence.matrix)
 
 # Track top 20 clones mapping to the CD4 and CD8 samples
 cloneTrack(sequence.matrix = sequence.matrix, productive.aa = productive.aa, 
-   map = c("TCRB_Day949_CD4", "TCRB_Day949_CD8"), label = c("CD4", "CD8"), 
+   map = c("TRB_CD4_949", "TRB_CD8_949"), label = c("CD4", "CD8"), 
    track = top.freq$aminoAcid[1:20], unassigned = TRUE) 
 
 # Track the top 10 clones from top.freq
@@ -67,17 +67,17 @@ cloneTrack(sequence.matrix = sequence.matrix, productive.aa = productive.aa,
 
 # Track clones mapping to the CD4 and CD8 samples while ignoring all others
 cloneTrack(sequence.matrix = sequence.matrix, productive.aa = productive.aa, 
-   map = c("TCRB_Day949_CD4", "TCRB_Day949_CD8"), label = c("CD4", "CD8"), 
+   map = c("TRB_CD4_949", "TRB_CD8_949"), label = c("CD4", "CD8"), 
    unassigned = FALSE) 
 
 # Track clones mapping to the CD4 and CD8 samples and track 2 specific sequences
 cloneTrack(sequence.matrix = sequence.matrix, productive.aa = productive.aa, 
-   map = c("TCRB_Day949_CD4", "TCRB_Day949_CD8"), label = c("CD4", "CD8"), 
+   map = c("TRB_CD4_949", "TRB_CD8_949"), label = c("CD4", "CD8"), 
    track = c("CASSPPTGERDTQYF", "CASSQDRTGQYGYTF"), unassigned = FALSE)
 
 # Reorder the x axis, change the axis labels, convert to log scale, and add title
-x.limits <- c("TCRB_Day0_Unsorted", "TCRB_Day32_Unsorted", 
-   "TCRB_Day83_Unsorted", "TCRB_Day949_Unsorted", "TCRB_Day1320_Unsorted")
+x.limits <- c("TRB_Unsorted_0", "TRB_Unsorted_32", 
+   "TRB_Unsorted_83", "TRB_Unsorted_949", "TRB_Unsorted_1320")
 
 sequence.matrix <- sequence.matrix[ ,c("aminoAcid", x.limits)]
    

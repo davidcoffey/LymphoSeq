@@ -53,7 +53,7 @@ file.list <- readImmunoSeq(path = file.path)
 
 productive.aa <- productiveSeq(file.list = file.list, aggregate = "aminoAcid")
 
-differentialAbundance(list = productive.aa, sample1 = "TCRB_Day949_Unsorted", sample2 = "TCRB_Day1320_Unsorted",
+differentialAbundance(list = productive.aa, sample1 = "TRB_Unsorted_949", sample2 = "TRB_Unsorted_1320",
                      type = "aminoAcid", q = 0.01, zero = 0.001, parallel = FALSE)
 }
 

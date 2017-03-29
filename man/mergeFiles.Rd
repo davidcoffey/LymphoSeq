@@ -31,8 +31,8 @@ file.path <- system.file("extdata", "TCRB_sequencing", package = "LymphoSeq")
 
 file.list <- readImmunoSeq(path = file.path)
 
-TCRB_Day949_Merged <- mergeFiles(samples = c("TCRB_Day949_CD4", 
-   "TCRB_Day949_CD8"), file.list)
+TCRB_Day949_Merged <- mergeFiles(samples = c("TRB_CD4_949", 
+   "TRB_CD8_949"), file.list)
 
 # To combine the merged data frames with file.list
 file.list <- c(list("TCRB_Day949_Merged" = TCRB_Day949_Merged), file.list)

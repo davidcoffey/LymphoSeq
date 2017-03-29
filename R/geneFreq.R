@@ -44,8 +44,8 @@
 #' 
 #' require(wordcloud)
 #' 
-#' wordcloud::wordcloud(words = vgenes[vgenes$samples == "TCRB_Day83_Unsorted", "geneName"], 
-#'    freq = vgenes[vgenes$samples == "TCRB_Day83_Unsorted", "frequencyGene"], 
+#' wordcloud::wordcloud(words = vgenes[vgenes$samples == "TRB_Unsorted_83", "geneName"], 
+#'    freq = vgenes[vgenes$samples == "TRB_Unsorted_83", "frequencyGene"], 
 #' 	  colors = RedBlue)
 #' 
 #' # Create a cumulative frequency bar plot of V gene usage

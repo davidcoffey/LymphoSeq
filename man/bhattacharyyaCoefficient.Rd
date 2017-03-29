@@ -29,8 +29,8 @@ file.list <- readImmunoSeq(path = file.path)
 
 productive.aa <- productiveSeq(file.list, aggregate = "aminoAcid")
 
-bhattacharyyaCoefficient(productive.aa[["TCRB_Day32_Unsorted"]], 
-   productive.aa[["TCRB_Day83_Unsorted"]])
+bhattacharyyaCoefficient(productive.aa[["TRB_Unsorted_32"]], 
+   productive.aa[["TRB_Unsorted_83"]])
 }
 \seealso{
 \code{\link{bhattacharyyaMatrix}}
