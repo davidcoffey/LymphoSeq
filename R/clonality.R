@@ -43,7 +43,6 @@ clonality <- function(file.list) {
     i <- 1
     for (i in 1:length(file.list)) {
         file <- file.list[[i]]
-<<<<<<< HEAD
         total.reads <- length(file$nucleotide)
         file$estimatedNumberGenomes <- suppressWarnings(as.integer(file$estimatedNumberGenomes))
         total.genomes <- sum(file$estimatedNumberGenomes)
@@ -60,7 +59,6 @@ clonality <- function(file.list) {
         table$clonality[i] <- clonality
         table$giniCoefficient[i] <- ineq::Gini(frequency)
         table$topProductiveSequence[i] <- max(frequency) * 100
-=======
         if (any(grepl("estimatedNumberGenomes", colnames(file)))) {
             file$estimatedNumberGenomes <- suppressWarnings(as.integer(file$estimatedNumberGenomes))
             total.genomes <- sum(file$estimatedNumberGenomes)
@@ -96,7 +94,6 @@ clonality <- function(file.list) {
             table$giniCoefficient[i] <- ineq::Gini(frequency)
             table$topProductiveSequence[i] <- max(frequency) * 100
         }
->>>>>>> master
     }
     table$samples <- as.character(table$samples)
     table <- table[order(nchar(table$samples), table$samples, decreasing = FALSE), ]
