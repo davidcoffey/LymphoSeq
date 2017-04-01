@@ -45,4 +45,3 @@ top.freq <- topFreq(productive.aa = productive.aa, percent = 0.1)
 Refer to the LymphoSeqDB package for details regarding the 
 prevalenceTRB and publishedTRB database.
 }
-

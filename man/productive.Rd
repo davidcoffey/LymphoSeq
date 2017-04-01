@@ -40,4 +40,3 @@ productive <- productive(sample = file.list[["TRB_Unsorted_32"]], aggregate = "a
 \seealso{
 \code{\link{productiveSeq}}
 }
-

@@ -37,4 +37,3 @@ searchPublished(list = productive.aa)
 Refer to the LymphoSeqDB package for details regarding the 
 publishedTRB database.
 }
-
