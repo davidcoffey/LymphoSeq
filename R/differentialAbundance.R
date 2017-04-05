@@ -20,8 +20,6 @@
 #' @param abundance The input value for the Fisher exact test.  "estimatedNumberGenomes"
 #' is recommend but "count" may also be used.
 #' @param parallel A boolean indicating wheter parallel processing should be used or not.
-#' @param cores An integer specifying the number of processor cores if parallel processing
-#' is used.
 #' @return Returns a data frame with columns corresponding to the frequency of the abudance
 #' measure in samples 1 and 2, the P value, Q value (Holms adjusted P value, also knowns as 
 #' the false discovery rate), and log2 transformed fold change.
@@ -38,9 +36,8 @@
 #' @export
 #' @importFrom stats p.adjust
 #' @importFrom stats fisher.test
-#' @importFrom doMC registerDoMC
 differentialAbundance <- function(sample1, sample2, list, abundance = "estimatedNumberGenomes", 
-                                  type = "aminoAcid", q = 1, zero = 0.001, parallel = TRUE, cores = 4) {
+                                  type = "aminoAcid", q = 1, zero = 0.001, parallel = TRUE) {
     x <- list[[sample1]]
     y <- list[[sample2]]
     sequences <- union(x[, type], y[, type])
@@ -77,7 +74,7 @@ differentialAbundance <- function(sample1, sample2, list, abundance = "estimated
                               p = p.value)
         return(results)
     }
-    doMC::registerDoMC(cores = cores)
+    #doMC::registerDoMC(cores = cores)
     results <- plyr::ldply(sequences, fisherFunction, .parallel = parallel)
     results$q <- stats::p.adjust(results$p, method = "holm")
     x.not.zero <- results[, "x"]
