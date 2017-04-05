@@ -175,7 +175,7 @@ head(common)
 To visualize the number of overlapping sequences between two or three samples in the form of a Venn diagram, use the function `commonSeqVenn`.
 
 ```{r, fig.width = 4, fig.height = 4, comment = ""}
-commonSeqsVenn(samples = c("TRB_Unsorted_32 ", "TRB_Unsorted_83"), 
+commonSeqsVenn(samples = c("TRB_Unsorted_32", "TRB_Unsorted_83"), 
                productive.seqs = productive.aa)
 ```
 
