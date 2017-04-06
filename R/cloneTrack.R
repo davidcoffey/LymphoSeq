@@ -83,31 +83,32 @@ cloneTrack <- function(sequence.matrix, map = "none", productive.aa,
         sequence.matrix$numberSamples <- NULL
         sequence.melt <- reshape::melt.data.frame(sequence.matrix, 
                                                   id.vars = "aminoAcid")
-        sequence.melt$map <- rep("Unassigned", length(sequence.matrix$aminoAcid))
+        names(sequence.melt) <- c("aminoAcid", "Sample", "Frequency")
+        sequence.melt$Map <- rep("Unassigned", length(sequence.matrix$aminoAcid))
         if (any(track != "none")) {
             i <- 1
             for (i in 1:length(track)) {
-                sequence.melt$map <- ifelse(sequence.melt$aminoAcid == track[i], 
-                                            track[i], sequence.melt$map)
+                sequence.melt$Map <- ifelse(sequence.melt$aminoAcid == track[i], 
+                                            track[i], sequence.melt$Map)
             }
         }
         j <- 1
         for (j in 1:length(map)) {
             file <- productive.aa[[map[j]]]
             aminoAcid <- as.character(file$aminoAcid)
-            sequence.melt$map <- ifelse(sequence.melt$aminoAcid %in% aminoAcid & 
-                                            sequence.melt$map == "Unassigned", 
-                                        label[j], sequence.melt$map)
+            sequence.melt$Map <- ifelse(sequence.melt$aminoAcid %in% aminoAcid & 
+                                            sequence.melt$Map == "Unassigned", 
+                                        label[j], sequence.melt$Map)
         }
         if (unassigned == FALSE) {
-            sequence.melt <- sequence.melt[sequence.melt$map != "Unassigned", ]
+            sequence.melt <- sequence.melt[sequence.melt$Map != "Unassigned", ]
         }
         getPalette <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(9, "Set1"))
         plot <- ggplot2::ggplot(sequence.melt, 
-                                aes_string(x = "variable", 
-                                           y = "value", 
+                                aes_string(x = "Sample", 
+                                           y = "Frequency", 
                                            group = "aminoAcid", 
-                                           color = "map")) + 
+                                           color = "Map")) + 
             geom_line() + 
             theme_minimal() + 
             scale_x_discrete(expand = c(0, 0)) + 
@@ -120,22 +121,23 @@ cloneTrack <- function(sequence.matrix, map = "none", productive.aa,
     } else {
         sequence.matrix$numberSamples <- NULL
         sequence.melt <- reshape::melt.data.frame(sequence.matrix, id.vars = "aminoAcid")
+        names(sequence.melt) <- c("aminoAcid", "Sample", "Frequency")
         if (any(track != "none")) {
-            sequence.melt$map <- rep("Unassigned", length(sequence.matrix$aminoAcid))
+            sequence.melt$Map <- rep("Unassigned", length(sequence.matrix$aminoAcid))
             k <- 1
             for (k in 1:length(track)) {
-                sequence.melt$map <- ifelse(sequence.melt$aminoAcid == track[k], 
-                                            track[k], sequence.melt$map)
+                sequence.melt$Map <- ifelse(sequence.melt$aminoAcid == track[k], 
+                                            track[k], sequence.melt$Map)
             }
             if (unassigned == FALSE) {
-                sequence.melt <- sequence.melt[sequence.melt$map != "Unassigned", 
+                sequence.melt <- sequence.melt[sequence.melt$Map != "Unassigned", 
                                                ]
             }
             getPalette <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(9, "Set1"))
-            plot <- ggplot2::ggplot(sequence.melt, aes_string(x = "variable", 
-                                                              y = "value", 
+            plot <- ggplot2::ggplot(sequence.melt, aes_string(x = "Sample", 
+                                                              y = "Frequency", 
                                                               group = "aminoAcid", 
-                                                              color = "map")) + 
+                                                              color = "Map")) + 
                 geom_line() + theme_minimal() + 
                 scale_x_discrete(expand = c(0,0)) + 
                 scale_y_continuous(expand = c(0, 0)) + 
@@ -144,8 +146,8 @@ cloneTrack <- function(sequence.matrix, map = "none", productive.aa,
                 theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
             return(plot)
         }
-        plot <- ggplot2::ggplot(sequence.melt, aes_string(x = "variable", 
-                                                          y = "value", 
+        plot <- ggplot2::ggplot(sequence.melt, aes_string(x = "Sample", 
+                                                          y = "Frequency", 
                                                           group = "aminoAcid")) + 
             geom_line() + 
             theme_minimal() + 
