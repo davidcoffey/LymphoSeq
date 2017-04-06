@@ -1,7 +1,7 @@
 #' Common sequences bar plot
 #' 
 #' Creates an UpSetR bar plot showing the number of intersecting sequences across 
-#' multiple samples.  This funciton is useful when more than 3 samples are being 
+#' multiple samples.  This function is useful when more than 3 samples are being 
 #' compared.
 #' 
 #' @param productive.aa A list data frames of of productive amino acid sequences 
