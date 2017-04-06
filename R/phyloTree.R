@@ -12,7 +12,7 @@
 #' should be compared.
 #' @param layout A character vector indicating the tree layout.  Options include 
 #' "rectangular", "slanted", "fan", "circular", "radial" and "unrooted".
-#' @param label A boolean indicating if the sequencing count should be shown next to the leaves.
+#' @param label A Boolean indicating if the sequencing count should be shown next to the leaves.
 #' @return Returns a phylogenetic tree where each leaf represents a sequence color coded by the
 #' V, D, and J gene usage.  The number next to each leaf refers to the sequence count.  A triangle 
 #' shaped leaf indicates the dominant sequence.  Refer to the ggtree Bioconductor package 
@@ -38,6 +38,12 @@
 #'          ggtree::theme_tree2() +
 #'          ggplot2::theme(legend.position = "right", legend.key = element_rect(colour = "white")) +
 #'          ggplot2::ggtitle("Title")
+#'          
+#' # Hide legend and leaf labels
+#' phyloTree(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "nucleotide", 
+#'          layout = "rectangular", label = FALSE) +
+#'          ggplot2::theme(legend.position="none")
+#'          
 #' @export
 #' @import ggtree
 #' @import ggplot2
