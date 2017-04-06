@@ -47,11 +47,11 @@ pairwisePlot <- function(matrix) {
     melt <- na.omit(melt)
     melt$variable <- factor(melt$variable, levels = rownames(matrix))
     melt$Samples <- factor(melt$Samples, levels = rev(rownames(matrix)))
-    plot <- ggplot(data = melt, aes_string("Samples", "variable", fill = "value")) + 
+    names(melt) = c("Sample.x", "Sample.y", "Score")
+    ggplot(data = melt, aes_string(x = "Sample.x", y = "Sample.y", fill = "Score")) + 
         geom_tile() + 
         scale_fill_gradient(low = "#fee8c8", high = "#e34a33") + 
         theme_classic() + 
         labs(x = "", y = "", fill = "") + 
         theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
-    return(plot)
 }
