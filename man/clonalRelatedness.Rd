@@ -39,7 +39,7 @@ file.list <- readImmunoSeq(path = file.path)
 clonal.relatedness <- clonalRelatedness(list = file.list, editDistance = 10)
 
 # Merge results with clonality table
-clonality <- clonality(list = file.list)
+clonality <- clonality(file.list = file.list)
 merged <- merge(clonality, clonal.relatedness)
 
 }
