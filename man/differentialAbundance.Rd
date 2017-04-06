@@ -6,7 +6,7 @@
 \usage{
 differentialAbundance(sample1, sample2, list,
   abundance = "estimatedNumberGenomes", type = "aminoAcid", q = 1,
-  zero = 0.001, parallel = TRUE, cores = 4)
+  zero = 0.001, parallel = TRUE)
 }
 \arguments{
 \item{sample1}{A character vector indicating the name of the first sample in the list
@@ -33,9 +33,6 @@ transformed fold change between samples 1 and 2.  This does not apply to the
 p and q value calculations.}
 
 \item{parallel}{A boolean indicating wheter parallel processing should be used or not.}
-
-\item{cores}{An integer specifying the number of processor cores if parallel processing
-is used.}
 }
 \value{
 Returns a data frame with columns corresponding to the frequency of the abudance
