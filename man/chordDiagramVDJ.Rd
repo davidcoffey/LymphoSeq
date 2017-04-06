@@ -50,4 +50,3 @@ chordDiagramVDJ(sample = top.seqs, association = "VJ", colors = c("red", "blue")
 \seealso{
 \code{\link{topSeqs}}
 }
-

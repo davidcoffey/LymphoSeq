@@ -27,4 +27,3 @@ productive.aa <- productiveSeq(file.list = file.list, aggregate = "aminoAcid")
 
 unique.seqs <- uniqueSeqs(productive.aa = productive.aa)
 }
-

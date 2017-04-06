@@ -27,13 +27,12 @@ Saves a pdf file of the multiple sequence alignemnt to the working directory.
 Perform multiple sequence alignment using one of three methods and output results as a pdf file.
 }
 \examples{
-file.path <- system.file("extdata", "TCRB_sequencing", package = "LymphoSeq")
+file.path <- system.file("extdata", "IGH_sequencing", package = "LymphoSeq")
 
 file.list <- readImmunoSeq(path = file.path)
 
 productive.nt <- productiveSeq(file.list = file.list, aggregate = "nucleotide")
 
-alignSeq(list = productive.nt, sample = "TRB_Unsorted_1320", type = "nucleotide", 
+alignSeq(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "nucleotide", 
          method = "ClustalW")
 }
-

@@ -21,7 +21,7 @@ should be compared.}
 \item{layout}{A character vector indicating the tree layout.  Options include 
 "rectangular", "slanted", "fan", "circular", "radial" and "unrooted".}
 
-\item{label}{A boolean indicating if the sequencing count should be shown next to the leaves.}
+\item{label}{A Boolean indicating if the sequencing count should be shown next to the leaves.}
 }
 \value{
 Returns a phylogenetic tree where each leaf represents a sequence color coded by the
@@ -54,5 +54,10 @@ phyloTree(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "aminoAcid",
          ggtree::theme_tree2() +
          ggplot2::theme(legend.position = "right", legend.key = element_rect(colour = "white")) +
          ggplot2::ggtitle("Title")
+         
+# Hide legend and leaf labels
+phyloTree(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "nucleotide", 
+         layout = "rectangular", label = FALSE) +
+         ggplot2::theme(legend.position="none")
+         
 }
-

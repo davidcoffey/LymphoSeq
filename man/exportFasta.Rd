@@ -34,4 +34,3 @@ productive.aa <- productiveSeq(file.list = file.list, aggregate = "aminoAcid")
 
 exportFasta(list = productive.aa, type = "aminoAcid", names = "frequencyCount")
 }
-

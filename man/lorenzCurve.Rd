@@ -59,4 +59,3 @@ lorenz.curve + ggplot2::scale_color_manual(name = "Samples", breaks = samples,
 An excellent resource for examples on how to reformat a ggplot can 
 be found in the R Graphics Cookbook online (\url{http://www.cookbook-r.com/Graphs/}).
 }
-

@@ -35,4 +35,3 @@ bhattacharyyaCoefficient(productive.aa[["TRB_Unsorted_32"]],
 \seealso{
 \code{\link{bhattacharyyaMatrix}}
 }
-

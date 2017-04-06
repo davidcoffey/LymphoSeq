@@ -51,4 +51,3 @@ top.freq.matrix <- merge(top.freq, sequence.matrix)
 \seealso{
 \code{\link{topSeqs}} and \code{\link{uniqueSeqs}}
 }
-
