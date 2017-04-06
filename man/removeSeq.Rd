@@ -33,4 +33,3 @@ cleansed <- removeSeq(file.list = file.list, sequence = "CASSDLIGNGKLFF")
 
 searchSeq(list = cleansed, sequence = "CASSDLIGNGKLFF")
 }
-

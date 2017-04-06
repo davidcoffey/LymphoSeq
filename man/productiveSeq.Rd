@@ -54,4 +54,3 @@ productive.aa <- productiveSeq(file.list = file.list,
 Refer to the LymphoSeqDB package for details regarding the 
 prevalenceTRB database.
 }
-

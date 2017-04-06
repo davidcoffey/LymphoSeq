@@ -34,4 +34,3 @@ similarityMatrix(productive.seqs = productive.aa)
 \seealso{
 \code{\link{pairwisePlot}} for plotting results as a heat map.
 }
-

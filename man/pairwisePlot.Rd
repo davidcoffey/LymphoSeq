@@ -46,4 +46,3 @@ be found in the R Graphics Cookbook online (\url{http://www.cookbook-r.com/Graph
 The functions to create the similarity or Bhattacharyya matrix can be found 
 here: \code{\link{similarityMatrix}} and \code{\link{bhattacharyyaMatrix}}
 }
-

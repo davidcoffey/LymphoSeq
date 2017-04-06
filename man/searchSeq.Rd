@@ -70,4 +70,3 @@ searchSeq(list = file.list, sequence = "CASSPVS", type = "aminoAcid",
 
 searchSeq(list = file.list, sequence = nt, type = "nucleotide", editDistance = 0)
 }
-

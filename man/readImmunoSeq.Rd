@@ -70,4 +70,3 @@ file.list <- readImmunoSeq(path = file.path,
                                      "estimatedNumberGenomes"), 
                            recursive = FALSE)
 }
-

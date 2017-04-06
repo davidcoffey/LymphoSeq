@@ -74,4 +74,3 @@ ggplot2::ggplot(vgenes, aes(x = samples, y = frequencyGene, fill = geneName)) +
   labs(y = "Frequency (\%)", x = "", fill = "") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 }
-

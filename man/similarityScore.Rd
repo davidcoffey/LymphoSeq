@@ -34,4 +34,3 @@ similarityScore(productive.aa[["TRB_Unsorted_32"]], productive.aa[["TRB_Unsorted
 \seealso{
 \code{\link{similarityMatrix}}
 }
-
