@@ -40,7 +40,7 @@ chordDiagramVDJ <- function(sample, association = "VJ", colors = c("red", "blue"
             stop("The source data frame does not contain the required columns 'vFamilyName' and 'jFamilyName'.")
         }
         vj <- sample[, c("vFamilyName", "jFamilyName")]
-        vj[is.na(vj) | vj == ""] <- "unresolved"
+        vj[is.na(vj) | vj == ""] <- "Unresolved"
         vj$vFamilyName <- as.character(vj$vFamilyName)
         vj$jFamilyName <- as.character(vj$jFamilyName)
         table <- table(vj$vFamilyName, vj$jFamilyName)
@@ -55,8 +55,8 @@ chordDiagramVDJ <- function(sample, association = "VJ", colors = c("red", "blue"
         if (!all(c("dFamilyName", "jFamilyName") %in% colnames(sample))) {
             stop("The source data frame does not contain the required columns 'dFamilyName' and 'jFamilyName'.")
         }
-        dj <- sample[, c("vFamilyName", "jFamilyName")]
-        dj[is.na(dj) | dj == ""] <- "unresolved"
+        dj <- sample[, c("dFamilyName", "jFamilyName")]
+        dj[is.na(dj) | dj == ""] <- "Unresolved"
         dj$dFamilyName <- as.character(dj$dFamilyName)
         dj$jFamilyName <- as.character(dj$jFamilyName)
         table <- table(dj$dFamilyName, dj$jFamilyName)
