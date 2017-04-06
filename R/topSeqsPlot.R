@@ -36,16 +36,26 @@ topSeqsPlot <- function(list, top = 10) {
     }
     dominant <- plyr::llply(list, function(x) 
         x$frequencyCount[order(x$frequencyCount, decreasing = TRUE)][1:top])
+    aminoAcid <- plyr::llply(list, function(x) 
+        x$aminoAcid[order(x$frequencyCount, decreasing = TRUE)][1:top])
     subdominant <- plyr::llply(dominant, function(x) 100 - sum(x))
-    topfreq <- plyr::ldply(c(dominant, subdominant), data.frame)
-    colnames(topfreq) <- c("Samples", "Frequency")
+
+    dominant.df <- plyr::ldply(dominant, data.frame)
+    aminoAcid.df <- plyr::ldply(aminoAcid, data.frame)
+    subdominant.df <- plyr::ldply(subdominant, data.frame)
+    
+    dominant.df$aminoAcid <- aminoAcid.df$X..i..
+    subdominant.df$aminoAcid <- rep("All other sequences", ncol(subdominant.df))
+    topfreq <- rbind(dominant.df,subdominant.df)
+    
+    colnames(topfreq) <- c("Sample", "Frequency", "aminoAcid")
     topfreq$Sequence <- factor(paste("Sequence", c(rep(1:top, length(list)), 
                                                    rep(top + 1, length(list)))))
     topfreq$Sequence <- factor(topfreq$Sequence, 
                                levels = paste("Sequence", 1:(top + 1)))
     x.order <- names(subdominant[order(topfreq[topfreq$Sequence == paste("Sequence", top + 1), "Frequency"])])
     getPalette <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(11, "Spectral"))
-    ggplot(topfreq[nrow(topfreq):1, ], aes_string(x = "Samples", y = "Frequency", fill = "Sequence")) + 
+    ggplot(topfreq, aes_string(x = "Sample", y = "Frequency", fill = "Sequence", label = "Frequency", text = "aminoAcid")) + 
         geom_bar(stat = "identity") + 
         scale_x_discrete(limits = x.order) + 
         scale_fill_manual(values = getPalette(top + 1)) + 
