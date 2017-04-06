@@ -30,7 +30,7 @@ across multiple samples.
 }
 \description{
 Creates an UpSetR bar plot showing the number of intersecting sequences across 
-multiple samples.  This funciton is useful when more than 3 samples are being 
+multiple samples.  This function is useful when more than 3 samples are being 
 compared.
 }
 \examples{
@@ -40,6 +40,6 @@ file.list <- readImmunoSeq(path = file.path)
 
 productive.aa <- productiveSeq(file.list = file.list, aggregate = "aminoAcid")
 
-commonSeqsBar(list = productive.aa, samples = c("TRB_CD4_949", "TRB_CD8_949", 
+commonSeqsBar(productive.aa = productive.aa, samples = c("TRB_CD4_949", "TRB_CD8_949", 
 "TRB_Unsorted_949", "TRB_Unsorted_1320"), color.sample = "TRB_CD8_949")
 }

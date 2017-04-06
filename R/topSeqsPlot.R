@@ -54,8 +54,9 @@ topSeqsPlot <- function(list, top = 10) {
     topfreq$Sequence <- factor(topfreq$Sequence, 
                                levels = paste("Sequence", 1:(top + 1)))
     x.order <- names(subdominant[order(topfreq[topfreq$Sequence == paste("Sequence", top + 1), "Frequency"])])
+    topfreq$CumulativeFrequency = topfreq$Frequency
     getPalette <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(11, "Spectral"))
-    ggplot(topfreq, aes_string(x = "Sample", y = "Frequency", fill = "Sequence", label = "Frequency", text = "aminoAcid")) + 
+    ggplot(topfreq, aes_string(x = "Sample", y = "CumulativeFrequency", fill = "Sequence", label = "Frequency", text = "aminoAcid")) + 
         geom_bar(stat = "identity") + 
         scale_x_discrete(limits = x.order) + 
         scale_fill_manual(values = getPalette(top + 1)) + 
