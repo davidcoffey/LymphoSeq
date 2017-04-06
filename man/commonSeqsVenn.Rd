@@ -48,4 +48,3 @@ dev.off()
 \seealso{
 \code{\link{commonSeqs}}
 }
-

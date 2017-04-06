@@ -34,4 +34,3 @@ top.seqs <- topSeqs(productive.seqs = productive.aa, top = 1)
 \seealso{
 \code{\link{chordDiagramVDJ}}
 }
-
