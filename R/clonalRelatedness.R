@@ -18,11 +18,16 @@
 #' means the sequences are identical and an edit distance of 1 indicates that 
 #' @return Returns a data frame with the calculated clonal relatedness for each sample.
 #' @examples
-#' file.path <- system.file("extdata", "TCRB_sequencing", package = "LymphoSeq")
+#' file.path <- system.file("extdata", "IGH_sequencing", package = "LymphoSeq")
 #' 
 #' file.list <- readImmunoSeq(path = file.path)
 #' 
 #' clonal.relatedness <- clonalRelatedness(list = file.list, editDistance = 10)
+#' 
+#' # Merge results with clonality table
+#' clonality <- clonality(list = file.list)
+#' merged <- merge(clonality, clonal.relatedness)
+#' 
 #' @export
 #' @importFrom stringdist stringdist
 clonalRelatedness <- function(list, editDistance = 10){
