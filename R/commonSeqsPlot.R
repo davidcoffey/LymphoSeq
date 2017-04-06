@@ -9,6 +9,8 @@
 #' @param productive.aa A list of data frames of productive amino acid sequences 
 #' produced by the LymphoSeq function productiveSeq containing the 
 #' samples to be compared.
+#' @param show A character vector specifying whether only the common sequences 
+#' should be shown or all sequences.  Available options are "common" or "all".
 #' @return Returns a frequency scatter plot of two samples showing only the 
 #' shared sequences.
 #' @details The plot is made using the package ggplot2 and can be reformatted
@@ -33,27 +35,29 @@
 #'    ggplot2::annotation_logticks(sides = "bl")
 #' @export
 #' @import ggplot2
-commonSeqsPlot <- function(sample1, sample2, productive.aa) {
+commonSeqsPlot <- function(sample1, sample2, productive.aa, show = "common") {
     if(any(unlist(lapply(productive.aa, function(x) 
         x[, "aminoAcid"] == "" |
         grepl("\\*", x[, "aminoAcid"]) | 
         duplicated(x[, "aminoAcid"]))))){
         stop("Your list contains unproductive sequences or has not been aggreated for productive amino acid sequences.  Remove unproductive sequences first using the function productiveSeq with the aggregate parameter set to 'aminoAcid'.", call. = FALSE)
     }
-    a <- productive.aa[[sample1]]
-    b <- productive.aa[[sample2]]
-    common <- intersect(a$aminoAcid, b$aminoAcid)
-    common.seq <- data.frame(aminoAcid = common)
-    common.a <- a[a$aminoAcid %in% common, ]
-    common.b <- b[b$aminoAcid %in% common, ]
-    common.seq$freq.a <- common.a$freq
-    common.seq$freq.b <- common.b$freq
-    common.seq$difference <- common.a$freq - common.b$freq
-    common.seq$log.fold.change <- log(common.a$freq/common.b$freq)
-    common.seq <- common.seq[order(common.seq$log.fold.change, decreasing = TRUE), ]
-    plot <- ggplot2::ggplot(data = common.seq, aes_string("freq.a", "freq.b")) + 
-        geom_point(size = 3) +
-        theme_minimal() + 
-        labs(x = paste(sample1, "frequency (%)"), y = paste(sample2, "frequency (%)"))
+    if (show == "common") {
+        common <- commonSeqs(samples = c(sample1, sample2), productive.aa = productive.aa)
+        plot <- ggplot2::ggplot(data = common, aes_string(x = names(common)[2], y = names(common)[3], label = "aminoAcid")) + 
+            geom_point() +
+            theme_minimal() + 
+            labs(x = paste(sample1, "frequency (%)"), y = paste(sample2, "frequency (%)"))
+    }
+    if (show == "all") {
+        all <- merge(productive.aa[[sample1]], productive.aa[[sample2]], by = "aminoAcid", all = TRUE)
+        all[is.na(all)] <- 0
+        names(all)[names(all) == "frequencyCount.x"] <- sample1
+        names(all)[names(all) == "frequencyCount.y"] <- sample2
+        plot <- ggplot2::ggplot(data = all, aes_string(x = sample1, y = sample2, label = "aminoAcid")) + 
+            geom_point() +
+            theme_minimal() + 
+            labs(x = paste(sample1, "frequency (%)"), y = paste(sample2, "frequency (%)"))
+    }
     return(plot)
 }
