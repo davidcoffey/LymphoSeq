@@ -4,7 +4,8 @@
 \alias{alignSeq}
 \title{Align mutliple sequences}
 \usage{
-alignSeq(list, sample, type = "nucleotide", method = "ClustalOmega")
+alignSeq(list, sample = NULL, sequence = NULL, editDistance = 15,
+  output = "consule", type = "nucleotide", method = "ClustalOmega")
 }
 \arguments{
 \item{list}{A list of data frames consisting of antigen receptor sequences 
@@ -12,6 +13,17 @@ imported by the LymphoSeq function readImmunoSeq.}
 
 \item{sample}{A character vector indicating the name of the sample in the productive
 sequence list.}
+
+\item{sequence}{A character vector of one ore more amino acid or nucleotide 
+CDR3 sequences to search.}
+
+\item{editDistance}{An integer giving the minimum edit distance that the 
+sequence must be less than or equal to.  See details below.}
+
+\item{output}{A character vector indicating where the multiple sequence alignemnt should be
+printed.  Options include "consule" or "pdf".  If "pdf" is selected, the file is saved to
+the working directory.  For "pdf" to work, Texshade must be installed.  Refer to the 
+Bioconductor package msa installation instructions for more details.}
 
 \item{type}{A character vector indicating whether "aminoAcid" or "nucleotide" sequences
 should be aligned.  If "aminoAcid" is specified, then run productiveSeqs first.}
@@ -21,10 +33,21 @@ be used.  Refer to the Bioconductor msa package for more details.  Options incud
 "ClustalW", "ClustalOmega", and "Muscle".}
 }
 \value{
-Saves a pdf file of the multiple sequence alignemnt to the working directory.
+Performs a multiple sequence alignemnt and prints to the consule or saves a pdf to 
+the working directory.
 }
 \description{
-Perform multiple sequence alignment using one of three methods and output results as a pdf file.
+Perform multiple sequence alignment using one of three methods and output results to the 
+consule or as a pdf file.  One may perform the alignment of all amino acid or nucleotide
+sequences in a single sample  Alternatively, one may search for a given sequence 
+within a list of samples using an edit distance threshold.
+}
+\details{
+Edit distance is a way of quantifying how dissimilar two sequences 
+are to one another by counting the minimum number of operations required to 
+transform one sequence into the other.  For example, an edit distance of 0 
+means the sequences are identical and an edit distance of 1 indicates that 
+the sequences different by a single amino acid or nucleotide.
 }
 \examples{
 file.path <- system.file("extdata", "IGH_sequencing", package = "LymphoSeq")
@@ -34,5 +57,10 @@ file.list <- readImmunoSeq(path = file.path)
 productive.nt <- productiveSeq(file.list = file.list, aggregate = "nucleotide")
 
 alignSeq(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "nucleotide", 
-         method = "ClustalW")
+         method = "ClustalW", output = "consule")
+}
+\seealso{
+If having trouble saving pdf files, refer to Biconductor package msa for
+installation instructions
+\url{http://bioconductor.org/packages/release/bioc/vignettes/msa/inst/doc/msa.pdf}
 }
