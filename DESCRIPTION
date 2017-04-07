@@ -17,5 +17,5 @@ LazyData: true
 RoxygenNote: 6.0.1
 Suggests: knitr, pheatmap, wordcloud, rmarkdown
 VignetteBuilder: knitr
-biocViews: Software, Technology, Sequencing, TargetedResequencing
+biocViews: Software, Technology, Sequencing, TargetedResequencing, Alignment, MultipleSequenceAlignment
 NeedsCompilation: no

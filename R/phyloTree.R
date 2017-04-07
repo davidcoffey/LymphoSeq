@@ -79,13 +79,13 @@ phyloTree <- function(list, sample, type = "nucleotide", layout = "rectangular",
                                   dominant = c("Yes", rep("No", nrow(file) - 1)))
     getPalette <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(9, "Set1"))
     plot <- ggtree::ggtree(tree, layout = layout) %<+% tree.annotation + 
-        ggtree::geom_tippoint(aes(color = geneFamilies, shape = dominant), size = 3) + 
+        ggtree::geom_tippoint(aes_string(color = "geneFamilies", shape = "dominant"), size = 3) + 
         ggplot2::scale_color_manual(values = getPalette(length(unique(geneFamilies)))) + 
         ggplot2::guides(shape = FALSE) + 
         ggplot2::theme(legend.position = "bottom", legend.key = element_rect(colour = "white")) + 
         ggplot2::labs(color = "")
     if(label == TRUE){
-        plot <- plot + ggplot2::geom_text(aes(label=count), nudge_x = 0.5, hjust = 0, size = 2.5, na.rm = TRUE, check_overlap = TRUE)
+        plot <- plot + ggplot2::geom_text(aes_string(label="count"), nudge_x = 0.5, hjust = 0, size = 2.5, na.rm = TRUE, check_overlap = TRUE)
     }
     return(plot)
 }
