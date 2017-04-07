@@ -15,6 +15,8 @@
 #' list whose intersections will be colored.
 #' @param color A character vector of a color name that will be used highlight a selected 
 #' sample or multiple sample intersections.
+#' @param labels A Boolean indicating whether the number of intersecting sequences should
+#' be shown on the tops of the bars.
 #' @return Returns an UpSetR bar plot showing the number of intersecting sequences 
 #' across multiple samples.
 #' @examples
@@ -29,7 +31,7 @@
 #' @export
 #' @import UpSetR
 commonSeqsBar = function(productive.aa, samples, color.sample = NULL , 
-                         color.intersection = NULL, color = "#377eb8"){
+                         color.intersection = NULL, color = "#377eb8", labels = FALSE){
     unique.seqs = uniqueSeqs(productive.aa = productive.aa)
     sequence.matrix = seqMatrix(productive.aa = productive.aa, sequences = unique.seqs$aminoAcid)
     aminoAcid = sequence.matrix$aminoAcid
@@ -51,7 +53,7 @@ commonSeqsBar = function(productive.aa, samples, color.sample = NULL ,
               point.size = 1,
               text.scale = 1, 
               mb.ratio = c(0.7, 0.3),
-              show.numbers = FALSE,
+              show.numbers = labels,
               matrix.dot.alpha = 0,
               query.legend = "bottom",
               queries = list(list(query = queryFunction, 
@@ -72,7 +74,7 @@ commonSeqsBar = function(productive.aa, samples, color.sample = NULL ,
               point.size = 1,
               text.scale = 1, 
               mb.ratio = c(0.7, 0.3),
-              show.numbers = FALSE,
+              show.numbers = labels,
               matrix.dot.alpha = 0,
               queries = list(list(query = elements, 
                                   params = list(color.intersection), 
@@ -91,7 +93,7 @@ commonSeqsBar = function(productive.aa, samples, color.sample = NULL ,
               point.size = 1,
               text.scale = 1, 
               mb.ratio = c(0.7, 0.3),
-              show.numbers = FALSE,
+              show.numbers = labels,
               matrix.dot.alpha = 0)
     }
 }
