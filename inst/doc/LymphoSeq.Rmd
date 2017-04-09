@@ -118,7 +118,7 @@ The [Gini coefficient](https://en.wikipedia.org/wiki/Gini_coefficient) is an alt
 Both Gini coefficient and clonality are reported on a scale from 0 to 1 where 0 indicates all sequences have the same frequency and 1 indicates the repertoire is dominated by a single sequence.
 
 ## Calculate clonal relatedness
-One of the drawbacks of the clonality metric is that it does not take into account sequence similarity.  This is particularly important when studying affinity maturation or B cell malignancies[(Lombardo, K.A., *et al. Blood Advances* 2017 1:535-544)](http://www.bloodadvances.org/content/1/9/535). Clonal relatedness is a useful metric that takes into account sequence similarity without regard for clonal frequency.  It is defined as the proportion of nucleotide sequences that are related by a defined edit distance threshold. The value ranges from 0 to 1 where 0 indicates no sequences are related and 1 indicates all sequences are related.  Edit distance is a way of quantifying how dissimilar two sequences are to one another by counting the minimum number of operations required to transform one sequence into the other. For example, an edit distance of 0 means the sequences are identical and an edit distance of 1 indicates that the sequences different by a single amino acid or nucleotide.
+One of the drawbacks of the clonality metric is that it does not take into account sequence similarity.  This is particuarly important when studying affinity maturation or B cell malignancies[(Lombardo, K.A., *et al. Blood Advances* 2017 1:535-544)](http://www.bloodadvances.org/content/1/9/535). Clonal relatedness is a useful metric that takes into account sequence similarity without regard for clonal frequency.  It is defined as the proportion of nucleotide sequences that are related by a defined edit distance threshold. The value ranges from 0 to 1 where 0 indicates no sequences are related and 1 indicates all sequences are related.  Edit distance is a way of quantifying how dissimilar two sequences are to one another by counting the minimum number of operations required to transform one sequence into the other. For example, an edit distance of 0 means the sequences are identical and an edit distance of 1 indicates that the sequences different by a single amino acid or nucleotide.
 
 ```{r, results = "hide"}
 IGH.path <- system.file("extdata", "IGH_sequencing", package = "LymphoSeq")
@@ -130,7 +130,7 @@ clonalRelatedness(list = IGH.list, editDistance = 10)
 ```
 
 ## Draw a phylogenetic tree
-A phylogenetic tree is a useful way to visualize the similarity between sequences.  The `phyloTree` function create a phylogenetic tree of a single sample using neighbor joining tree estimation for amino acid or nucleotide CDR3 sequences.  Each leaf in the tree represents a sequence color coded by the V, D, and J gene usage. The number next to each leaf refers to the sequence count. A triangle shaped leaf indicates the most frequent sequence.  The distance between leaves on the horizontal axis corresponds to the sequence similarity (i.e. the further apart the leaves are horizontally, the less similar the sequences are to one another).
+A phylogenetic tree is a useful way to visualize the similarity between sequences.  The `phyloTree` function create a phylogenetic tree of a single sample using neighbor joining tree estimation for amino acid or nucleotide CDR3 sequences.  Each leaf in the tree represents a sequence color coded by the V, D, and J gene usage. The number next to each leaf refers to the sequence count. A triangle shaped leaf indicates the most frequent sequence.  The distance between leaves on the horitzonal axis corresponds to the sequence similarity (i.e. the further apart the leaves are horizontally, the less similar the sequences are to one another).
 
 ```{r, results = "hide"}
 productive.IGH.nt <- productiveSeq(file.list = IGH.list, aggregate = "nucleotide")
@@ -142,7 +142,7 @@ phyloTree(list = productive.IGH.nt, sample = "IGH_MVQ92552A_BL", type = "nucleot
 ```
 
 ## Multiple sequence alignment
-In LymphoSeq, you can perform a multiple sequence alignment using one of three methods provided by the Bioconductor msa package (ClustalW, ClustalOmega, or Muscle) and output results to the console or as a pdf file. One may perform the alignment of all amino acid or nucleotide sequences in a single sample.
+In LymphoSeq, you can perform a multiple sequence alignment using one of three methods provided by the Bioconductor msa package (ClustalW, ClustalOmega, or Muscle) and output results to the consule or as a pdf file. One may perform the alignment of all amino acid or nucleotide sequences in a single sample.
 
 ```{r, comment = ""}
 alignSeq(list = productive.IGH.nt, sample = "IGH_MVQ92552A_BL", type = "aminoAcid", 
@@ -237,7 +237,7 @@ commonSeqsBar(productive.aa = productive.TRB.aa,
 ```
 
 ## Differential abundance
-When comparing a sample from two different time points, it is useful to identify sequences that are significantly more or less abundant in one versus the other time point [(DeWitt, W.S., *et al. Journal of Virology* 2015 89(8):4517-4526)](https://www.ncbi.nlm.nih.gov/pubmed/25653453).  The `differentialAbundance` function uses a Fisher exact test to calculate differential abundance of each sequence in two time points and report the log2 transformed fold change, P value and adjusted P value.
+When comparing a sample from two different time points, it is useful to identify sequences that are significantly more or less abundant in one versus the other time point [(DeWitt, W.S., *et al. Journal of Virology* 2015 89(8):4517-4526)](https://www.ncbi.nlm.nih.gov/pubmed/25653453).  The `differentialAbundance` function uses a Fisher exact test to calculate differential abdunance of each sequence in two time points and report the log2 transformed fold change, P value and adjusted P value.
 
 ```{r, comment = "", warning = FALSE}
 differentialAbundance(list = productive.TRB.aa, 
