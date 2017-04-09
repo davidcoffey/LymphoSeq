@@ -5,7 +5,7 @@
 \title{Align mutliple sequences}
 \usage{
 alignSeq(list, sample = NULL, sequence = NULL, editDistance = 15,
-  output = "consule", type = "nucleotide", method = "ClustalOmega")
+  output = "console", type = "nucleotide", method = "ClustalOmega")
 }
 \arguments{
 \item{list}{A list of data frames consisting of antigen receptor sequences 
@@ -21,7 +21,7 @@ CDR3 sequences to search.}
 sequence must be less than or equal to.  See details below.}
 
 \item{output}{A character vector indicating where the multiple sequence alignemnt should be
-printed.  Options include "consule" or "pdf".  If "pdf" is selected, the file is saved to
+printed.  Options include "console" or "pdf".  If "pdf" is selected, the file is saved to
 the working directory.  For "pdf" to work, Texshade must be installed.  Refer to the 
 Bioconductor package msa installation instructions for more details.}
 
@@ -33,13 +33,13 @@ be used.  Refer to the Bioconductor msa package for more details.  Options incud
 "ClustalW", "ClustalOmega", and "Muscle".}
 }
 \value{
-Performs a multiple sequence alignemnt and prints to the consule or saves a pdf to 
+Performs a multiple sequence alignemnt and prints to the console or saves a pdf to 
 the working directory.
 }
 \description{
 Perform multiple sequence alignment using one of three methods and output results to the 
-consule or as a pdf file.  One may perform the alignment of all amino acid or nucleotide
-sequences in a single sample  Alternatively, one may search for a given sequence 
+console or as a pdf file.  One may perform the alignment of all amino acid or nucleotide
+sequences in a single sample.  Alternatively, one may search for a given sequence 
 within a list of samples using an edit distance threshold.
 }
 \details{
@@ -57,7 +57,7 @@ file.list <- readImmunoSeq(path = file.path)
 productive.nt <- productiveSeq(file.list = file.list, aggregate = "nucleotide")
 
 alignSeq(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "nucleotide", 
-         method = "ClustalW", output = "consule")
+         method = "ClustalW", output = "console")
 }
 \seealso{
 If having trouble saving pdf files, refer to Biconductor package msa for

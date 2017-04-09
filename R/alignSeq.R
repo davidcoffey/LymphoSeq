@@ -1,8 +1,8 @@
 #' Align mutliple sequences
 #' 
 #' Perform multiple sequence alignment using one of three methods and output results to the 
-#' consule or as a pdf file.  One may perform the alignment of all amino acid or nucleotide
-#' sequences in a single sample  Alternatively, one may search for a given sequence 
+#' console or as a pdf file.  One may perform the alignment of all amino acid or nucleotide
+#' sequences in a single sample.  Alternatively, one may search for a given sequence 
 #' within a list of samples using an edit distance threshold.
 #' 
 #' @param list A list of data frames consisting of antigen receptor sequences 
@@ -19,7 +19,7 @@
 #' be used.  Refer to the Bioconductor msa package for more details.  Options incude 
 #' "ClustalW", "ClustalOmega", and "Muscle".
 #' @param output A character vector indicating where the multiple sequence alignemnt should be
-#' printed.  Options include "consule" or "pdf".  If "pdf" is selected, the file is saved to
+#' printed.  Options include "console" or "pdf".  If "pdf" is selected, the file is saved to
 #' the working directory.  For "pdf" to work, Texshade must be installed.  Refer to the 
 #' Bioconductor package msa installation instructions for more details.
 #' @details Edit distance is a way of quantifying how dissimilar two sequences 
@@ -28,7 +28,7 @@
 #' means the sequences are identical and an edit distance of 1 indicates that 
 #' the sequences different by a single amino acid or nucleotide.
 #' 
-#' @return Performs a multiple sequence alignemnt and prints to the consule or saves a pdf to 
+#' @return Performs a multiple sequence alignemnt and prints to the console or saves a pdf to 
 #' the working directory.
 #' @seealso If having trouble saving pdf files, refer to Biconductor package msa for
 #' installation instructions
@@ -41,12 +41,12 @@
 #' productive.nt <- productiveSeq(file.list = file.list, aggregate = "nucleotide")
 #' 
 #' alignSeq(list = productive.nt, sample = "IGH_MVQ92552A_BL", type = "nucleotide", 
-#'          method = "ClustalW", output = "consule")
+#'          method = "ClustalW", output = "console")
 #' @export
 #' @importFrom Biostrings DNAStringSet
 #' @importFrom Biostrings AAStringSet
 #' @import msa
-alignSeq = function(list, sample = NULL, sequence = NULL, editDistance = 15, output = "consule", type = "nucleotide", method = "ClustalOmega") {
+alignSeq = function(list, sample = NULL, sequence = NULL, editDistance = 15, output = "console", type = "nucleotide", method = "ClustalOmega") {
     if(!is.null(sequence) & is.null(sample)){
         file <- searchSeq(list = list, sequence = sequence, editDistance = editDistance, type = type, match = "partial")
         if(is.null(file)){
@@ -88,7 +88,7 @@ alignSeq = function(list, sample = NULL, sequence = NULL, editDistance = 15, out
         names(string) <- gsub(names(string), pattern = "IGH|IGL|IGK|TCRB|TCRA", replacement = "")
         names(string) <- gsub(names(string), pattern = "unresolved", replacement = "UNR")
         alignment <- msa::msa(string, method = method)
-        if(output == "consule"){
+        if(output == "console"){
             print(alignment, show = "complete")
         }
         if(output == "pdf"){
