@@ -32,12 +32,12 @@
 #' 
 #' differentialAbundance(list = productive.aa, sample1 = "TRB_Unsorted_949", 
 #'                       sample2 = "TRB_Unsorted_1320", type = "aminoAcid", q = 0.01, 
-#'                       zero = 0.001, parallel = FALSE)
+#'                       zero = 0.001)
 #' @export
 #' @importFrom stats p.adjust
 #' @importFrom stats fisher.test
 differentialAbundance <- function(sample1, sample2, list, abundance = "estimatedNumberGenomes", 
-                                  type = "aminoAcid", q = 1, zero = 0.001, parallel = TRUE) {
+                                  type = "aminoAcid", q = 1, zero = 0.001, parallel = FALSE) {
     x <- list[[sample1]]
     y <- list[[sample2]]
     sequences <- union(x[, type], y[, type])
