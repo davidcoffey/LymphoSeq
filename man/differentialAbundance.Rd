@@ -6,7 +6,7 @@
 \usage{
 differentialAbundance(sample1, sample2, list,
   abundance = "estimatedNumberGenomes", type = "aminoAcid", q = 1,
-  zero = 0.001, parallel = TRUE)
+  zero = 0.001, parallel = FALSE)
 }
 \arguments{
 \item{sample1}{A character vector indicating the name of the first sample in the list
@@ -52,5 +52,5 @@ productive.aa <- productiveSeq(file.list = file.list, aggregate = "aminoAcid")
 
 differentialAbundance(list = productive.aa, sample1 = "TRB_Unsorted_949", 
                       sample2 = "TRB_Unsorted_1320", type = "aminoAcid", q = 0.01, 
-                      zero = 0.001, parallel = FALSE)
+                      zero = 0.001)
 }
