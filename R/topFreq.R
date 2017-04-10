@@ -31,9 +31,8 @@
 #' @seealso Refer to the LymphoSeqDB package for details regarding the 
 #' prevalenceTRB and publishedTRB database.
 #' @export
-#' @import dplyr
 #' @import LymphoSeqDB
-#' @import LymphoSeqDB
+#' @importFrom dplyr group_by summarise
 topFreq <- function(productive.aa, percent = 0.1) {
     if(any(unlist(lapply(productive.aa, function(x) 
         x[, "aminoAcid"] == "" | grepl("\\*", x[, "aminoAcid"]) | 
