@@ -1,0 +1,9 @@
+LymphoSeq News
+
+Version 1.3.0 [April 1, 2017]
+ * Added function alignSeq
+ * Added funciton phyloSeq
+ * Added function exportFasta
+ * Added function differentialAbundance
+ * Added function clonalRelatedness
+ * Added function commonSeqsBar
