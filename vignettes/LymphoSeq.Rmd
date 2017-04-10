@@ -212,7 +212,7 @@ To visualize the number of overlapping sequences between two or three samples in
 
 ```{r, fig.width = 4, fig.height = 4, comment = ""}
 commonSeqsVenn(samples = c("TRB_Unsorted_32", "TRB_Unsorted_83"), 
-               productive.seqs = productive.TRB.aa)
+               productive.seqs = productive.aa)
 ```
 
 ```{r, fig.width = 4, fig.height = 4, comment = ""}
