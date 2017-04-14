@@ -41,7 +41,7 @@ the false discovery rate), and log2 transformed fold change.
 }
 \description{
 Use a Fisher exact test to calculate differential abdunance of each sequence in 
-two samples and report the log2 transformed fold change, P value and adjusted P value.
+two samples and reports the log2 transformed fold change, P value and adjusted P value.
 }
 \examples{
 file.path <- system.file("extdata", "TCRB_sequencing", package = "LymphoSeq")

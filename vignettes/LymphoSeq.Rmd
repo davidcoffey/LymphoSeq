@@ -1,7 +1,7 @@
 ---
 title: "Analysis of high-throughput sequencing of T and B cell receptors with LymphoSeq"
 author: "David G. Coffey, MD"
-date: "April 20, 2017"
+date: "April 14, 2017"
 output: 
     html_document:
         toc: true
@@ -10,12 +10,12 @@ output:
         highlight: default
         df_print: paged
 vignette: >
-    %\VignetteIndexEntry{An introduction to LymphoSeq}
+    %\VignetteIndexEntry{Analysis of high-throughput sequencing of T and B cell receptors with LymphoSeq}
     %\VignetteEngine{knitr::rmarkdown}
-    %\VignetteEncoding{UTF-8} 
+    %\VignetteEncoding{UTF-8}
 ---
 
-Application of high-throughput sequencing of T and B lymphocyte antigen receptors has great potential for improving the monitoring of lymphoid malignancies, assessing immune reconstitution after hematopoietic stem cell transplantation, and characterizing the composition of lymphocyte repertoires [(Warren, E. H. *et al. Blood* 2013;122:19–22)](https://www.ncbi.nlm.nih.gov/pubmed/?term=23656731)   LymhoSeq is an R package designed to import, analyze, and visualize antigen receptor sequencing from [Adaptive Biotechnologies' ImmunoSEQ assay](http://www.adaptivebiotech.com/immunoseq).  The package is also adaptable to the analysis of T and B cell receptor sequencing processed using other platforms such as [MiXCR](https://milaboratory.com/software/mixcr/) or [IMGT/HighV-QUEST](http://www.imgt.org/HighV-QUEST/login.action).  This vignette has been written to highlight some of the features of LymphoSeq and guide the user through a typical workflow.
+Application of high-throughput sequencing of T and B lymphocyte antigen receptors has great potential for improving the monitoring of lymphoid malignancies, assessing immune reconstitution after hematopoietic stem cell transplantation, and characterizing the composition of lymphocyte repertoires [(Warren, E. H. *et al. Blood* 2013;122:19–22)](https://www.ncbi.nlm.nih.gov/pubmed/?term=23656731).   LymhoSeq is an R package designed to import, analyze, and visualize antigen receptor sequencing from [Adaptive Biotechnologies' ImmunoSEQ assay](http://www.adaptivebiotech.com/immunoseq).  The package is also adaptable to the analysis of T and B cell receptor sequencing processed using other platforms such as [MiXCR](https://milaboratory.com/software/mixcr/) or [IMGT/HighV-QUEST](http://www.imgt.org/HighV-QUEST/login.action).  This vignette has been written to highlight some of the features of LymphoSeq and guide the user through a typical workflow.
 
 ## Importing data
 The LymphoSeq function `readImmunoSeq` imports tab-separated value (`.tsv`) files exported by Adaptive Biotechnologies ImmunoSEQ analyzer v2 where each row represents a unique sequence and each column is a variable with information about that sequence such as read count, frequency, or variable gene name.  **Note that the file format for ImmunoSEQ analyzer v3 is not yet supported and users must choose to export the v2 format from the analyzer software.**  Only files with the extension `.tsv` are imported while all other are disregarded.  It is possible to import files processed using other platforms as long as the files are tab-delimited, are given the extension `.tsv` and have identical column names as the ImmunoSEQs files (see `readImmunoSeq` manual for a list of column names used by this file type).  Refer to the LymphoSeq manual regarding the required column names used by each function.
@@ -32,7 +32,7 @@ TCRB.path <- system.file("extdata", "TCRB_sequencing", package = "LymphoSeq")
 TCRB.list <- readImmunoSeq(path = TCRB.path)
 ```
 
-Notice that each data frame listed in the `TCRB.list` object is named according the ImmunoSEQ file name files.  If different names are desired, you may rename the original `.tsv` files or assign `names(TCRB.list)` to a new character vector of desired names in the same order as the list.
+Notice that each data frame listed in the `TCRB.list` object is named according the ImmunoSEQ file names.  If different names are desired, you may rename the original `.tsv` files or assign `names(TCRB.list)` to a new character vector of desired names in the same order as the list.
 
 ```{r, comment = ""}
 names(TCRB.list)
@@ -142,7 +142,7 @@ phyloTree(list = productive.IGH.nt, sample = "IGH_MVQ92552A_BL", type = "nucleot
 ```
 
 ## Multiple sequence alignment
-In LymphoSeq, you can perform a multiple sequence alignment using one of three methods provided by the Bioconductor msa package (ClustalW, ClustalOmega, or Muscle) and output results to the console or as a pdf file. One may perform the alignment of all amino acid or nucleotide sequences in a single sample.
+In LymphoSeq, you can perform a multiple sequence alignment using one of three methods provided by the Bioconductor msa package (ClustalW, ClustalOmega, or Muscle) and output results to the console or as a pdf file. One may perform the alignment of all amino acid or nucleotide sequences in a single sample.  Alternatively, one may search for a given sequence within a list of samples using an edit distance threshold.
 
 ```{r, comment = ""}
 alignSeq(list = productive.IGH.nt, sample = "IGH_MVQ92552A_BL", type = "aminoAcid", 
@@ -190,9 +190,9 @@ To compare the T or B cell repertoires of all samples in a pairwise fashion, use
 
 ```{r, comment = ""}
 bhattacharyya.matrix <- bhattacharyyaMatrix(productive.seqs = productive.TRB.aa)
-bhattacharyya.matrix[,1:2]
+bhattacharyya.matrix
 similarity.matrix <- similarityMatrix(productive.seqs = productive.TRB.aa)
-similarity.matrix[,1:2]
+similarity.matrix
 ```
 
 The results of either function can be visualized by the `pairwisePlot` function.
@@ -224,7 +224,7 @@ To compare the frequency of sequences between two samples as a scatter plot, use
 
 ```{r, fig.width = 4, fig.height = 4, comment = ""}
 commonSeqsPlot("TRB_Unsorted_32", "TRB_Unsorted_83", 
-               productive.aa = productive.TRB.aa)
+               productive.aa = productive.TRB.aa, show = "common")
 ```
 
 If you have more than 3 samples to compare, use the `commonSeqBar` function.  You can chose to color a single sample with the `color.sample` argument or a desired intersection with the `color.intersection` argument.
@@ -233,11 +233,12 @@ If you have more than 3 samples to compare, use the `commonSeqBar` function.  Yo
 commonSeqsBar(productive.aa = productive.TRB.aa, 
               samples = c("TRB_CD4_949", "TRB_CD8_949", 
                           "TRB_Unsorted_949", "TRB_Unsorted_1320"), 
-              color.sample = "TRB_CD8_949")
+              color.sample = "TRB_CD8_949",
+              labels = "no")
 ```
 
 ## Differential abundance
-When comparing a sample from two different time points, it is useful to identify sequences that are significantly more or less abundant in one versus the other time point [(DeWitt, W.S., *et al. Journal of Virology* 2015 89(8):4517-4526)](https://www.ncbi.nlm.nih.gov/pubmed/25653453).  The `differentialAbundance` function uses a Fisher exact test to calculate differential abundance of each sequence in two time points and report the log2 transformed fold change, P value and adjusted P value.
+When comparing a sample from two different time points, it is useful to identify sequences that are significantly more or less abundant in one versus the other time point [(DeWitt, W.S., *et al. Journal of Virology* 2015 89(8):4517-4526)](https://www.ncbi.nlm.nih.gov/pubmed/25653453).  The `differentialAbundance` function uses a Fisher exact test to calculate differential abundance of each sequence in two time points and reports the log2 transformed fold change, P value and adjusted P value.
 
 ```{r, comment = "", warning = FALSE}
 differentialAbundance(list = productive.TRB.aa, 
@@ -253,7 +254,7 @@ To create a data frame of unique, productive amino acid sequences as rows and sa
 unique.seqs <- uniqueSeqs(productive.aa = productive.TRB.aa)
 head(unique.seqs)
 sequence.matrix <- seqMatrix(productive.aa = productive.TRB.aa, sequences = unique.seqs$aminoAcid)
-head(sequence.matrix)[1:6]
+head(sequence.matrix)
 ```
 
 If just the top clones with a frequency greater than a specified amount are of interest to you, then use the `topFreq` function.  This creates a data frame of the top productive amino acid sequences having a minimum specified frequency and reports the minimum, maximum, and mean frequency that the sequence appears in a list of samples. For TCRB sequences, the prevalence (%) and the published antigen specificity of that sequence are also provided.
@@ -268,7 +269,7 @@ One very useful thing to do is merge the output of `seqMatrix` and `topFreq`.
 ```{r, comment = ""}
 top.freq <- topFreq(productive.aa = productive.TRB.aa, percent = 0)
 top.freq.matrix <- merge(top.freq, sequence.matrix)
-head(top.freq.matrix)[1:12]
+head(top.freq.matrix)
 ```
 
 ## Tracking sequences across samples
@@ -344,9 +345,9 @@ ggplot2::ggplot(vGenes, aes(x = samples, y = frequencyGene, fill = familyName)) 
 Occasionally you may identify one or more sequences in your data set that appear to be contamination.  You can remove an amino acid sequence from all data frames using the function `removeSeq` and recompute frequencyCount for all remaining sequences.
 
 ```{r, comment = ""}
-searchSeq(list = productive.TRB.aa, sequence = "CASSDLIGNGKLFF")
-cleansed <- removeSeq(file.list = productive.TRB.aa, sequence = "CASSDLIGNGKLFF")
-searchSeq(list = cleansed, sequence = "CASSDLIGNGKLFF")
+searchSeq(list = productive.TRB.aa, sequence = "CASSESAGSTGELFF")
+cleansed <- removeSeq(file.list = productive.TRB.aa, sequence = "CASSESAGSTGELFF")
+searchSeq(list = cleansed, sequence = "CASSESAGSTGELFF")
 ```
 
 ## Merging samples

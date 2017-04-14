@@ -1,7 +1,7 @@
 #' Differential abundance analysis
 #' 
 #' Use a Fisher exact test to calculate differential abdunance of each sequence in 
-#' two samples and report the log2 transformed fold change, P value and adjusted P value.
+#' two samples and reports the log2 transformed fold change, P value and adjusted P value.
 #' 
 #' @param list A list of data frames consisting of antigen receptor sequences 
 #' imported by the LymphoSeq function readImmunoSeq.
