@@ -5,14 +5,14 @@ Biotechnologies' ImmunoSEQ assay](http://www.adaptivebiotech.com/immunoseq).
 
 ### Installation instructions
 
-#### Install release version 1.2.0
+#### Install release version 1.3
 ###### Install from [Bioconductor](https://www.bioconductor.org/packages/LymphoSeq)
 ```
 source("https://bioconductor.org/biocLite.R")
 biocLite("LymphoSeq")
 ```
 
-#### Install developer version 1.3.0
+#### Install developer version 1.4
 ###### Option 1:  Install from [Bioconductor developer branch](https://www.bioconductor.org/developers/how-to/useDevel/)
 ```
 # Switch to Bioconductor developer branch (requires latest version of R)

@@ -45,8 +45,6 @@ clonality <- function(file.list) {
     for (i in 1:length(file.list)) {
         file <- file.list[[i]]
         total.reads <- nrow(file)
-        file$estimatedNumberGenomes <- suppressWarnings(as.integer(file$estimatedNumberGenomes))
-        total.genomes <- sum(file$estimatedNumberGenomes)
         total.count <- sum(file$count)
         productive <- file[!grepl("\\*", file$aminoAcid) & file$aminoAcid != "", ]
         frequency <- productive$count/sum(productive$count)
@@ -55,7 +53,6 @@ clonality <- function(file.list) {
         clonality <- 1 - round(entropy/log2(unique.productive), digits = 6)
         table$totalSequences[i] <- total.reads
         table$uniqueProductiveSequences[i] <- unique.productive
-        table$totalGenomes[i] <- total.genomes
         table$totalCount[i] <- total.count
         table$clonality[i] <- clonality
         table$giniCoefficient[i] <- ineq::Gini(frequency)

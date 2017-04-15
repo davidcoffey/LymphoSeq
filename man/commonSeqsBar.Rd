@@ -5,7 +5,7 @@
 \title{Common sequences bar plot}
 \usage{
 commonSeqsBar(productive.aa, samples, color.sample = NULL,
-  color.intersection = NULL, color = "#377eb8", labels = FALSE)
+  color.intersection = NULL, color = "#377eb8", labels = "no")
 }
 \arguments{
 \item{productive.aa}{A list data frames of of productive amino acid sequences 
@@ -24,8 +24,9 @@ list whose intersections will be colored.}
 \item{color}{A character vector of a color name that will be used highlight a selected 
 sample or multiple sample intersections.}
 
-\item{labels}{A Boolean indicating whether the number of intersecting sequences should
-be shown on the tops of the bars.}
+\item{labels}{A character vector indicating whether the number of 
+intersecting sequences should be shown on the tops of the bars.  Options 
+include "yes" or "no".}
 }
 \value{
 Returns an UpSetR bar plot showing the number of intersecting sequences 
