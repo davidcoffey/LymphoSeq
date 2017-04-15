@@ -15,8 +15,9 @@
 #' list whose intersections will be colored.
 #' @param color A character vector of a color name that will be used highlight a selected 
 #' sample or multiple sample intersections.
-#' @param labels A Boolean indicating whether the number of intersecting sequences should
-#' be shown on the tops of the bars.
+#' @param labels A character vector indicating whether the number of 
+#' intersecting sequences should be shown on the tops of the bars.  Options 
+#' include "yes" or "no".
 #' @return Returns an UpSetR bar plot showing the number of intersecting sequences 
 #' across multiple samples.
 #' @examples
@@ -31,7 +32,7 @@
 #' @export
 #' @import UpSetR
 commonSeqsBar = function(productive.aa, samples, color.sample = NULL , 
-                         color.intersection = NULL, color = "#377eb8", labels = FALSE){
+                         color.intersection = NULL, color = "#377eb8", labels = "no"){
     unique.seqs = uniqueSeqs(productive.aa = productive.aa)
     sequence.matrix = seqMatrix(productive.aa = productive.aa, sequences = unique.seqs$aminoAcid)
     aminoAcid = sequence.matrix$aminoAcid
@@ -59,7 +60,7 @@ commonSeqsBar = function(productive.aa, samples, color.sample = NULL ,
               queries = list(list(query = queryFunction, 
                                   params = list(productive.aa[[color.sample]]$aminoAcid), 
                                   color = "#377eb8",
-                                  active = T,
+                                  active = TRUE,
                                   query.name = color.sample)))
     }
     
