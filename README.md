@@ -5,14 +5,14 @@ Biotechnologies' ImmunoSEQ assay](http://www.adaptivebiotech.com/immunoseq).
 
 ### Installation instructions
 
-#### Install release version 1.3
+#### Install release version 1.4
 ###### Install from [Bioconductor](https://www.bioconductor.org/packages/LymphoSeq)
 ```
 source("https://bioconductor.org/biocLite.R")
 biocLite("LymphoSeq")
 ```
 
-#### Install developer version 1.4
+#### Install developer version 1.5
 ###### Option 1:  Install from [Bioconductor developer branch](https://www.bioconductor.org/developers/how-to/useDevel/)
 ```
 # Switch to Bioconductor developer branch (requires latest version of R)
@@ -42,9 +42,9 @@ devtools::install_github("davidcoffey/LymphoSeq")
 ```
 
 ### Documentation
-* [LymphoSeq vignette](https://bioconductor.org/packages/release/bioc/vignettes/LymphoSeq/inst/doc/LymphoSeq.pdf)
+* [LymphoSeq vignette](http://bioconductor.org/packages/release/bioc/vignettes/LymphoSeq/inst/doc/LymphoSeq.html)
 * [LymphoSeq manual](https://bioconductor.org/packages/release/bioc/manuals/LymphoSeq/man/LymphoSeq.pdf)
 * [LymphoSeq news](https://bioconductor.org/packages/release/bioc/news/LymphoSeq/NEWS)
 
 ### Citation
-Coffey D (2016). LymphoSeq: Analyze high-throughput sequencing of T and B cell receptors. R package version 1.0.0.
+Coffey D (2017). LymphoSeq: Analyze high-throughput sequencing of T and B cell receptors. R package version 1.4.
