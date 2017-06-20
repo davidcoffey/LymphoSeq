@@ -1,6 +1,6 @@
 Package: LymphoSeq
 Title: Analyze high-throughput sequencing of T and B cell receptors
-Version: 1.5.1
+Version: 1.5.2
 Author: David Coffey <dcoffey@fredhutch.org>
 Maintainer: David Coffey <dcoffey@fredhutch.org>
 Description: This R package analyzes high-throughput sequencing of T

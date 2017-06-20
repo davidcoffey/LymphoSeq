@@ -47,7 +47,7 @@ topSeqsPlot <- function(list, top = 10) {
     subdominant.df <- plyr::ldply(subdominant, data.frame)
     
     dominant.df$aminoAcid <- aminoAcid.df$X..i..
-    subdominant.df$aminoAcid <- rep("All other sequences", ncol(subdominant.df))
+    subdominant.df$aminoAcid <- rep("All other sequences", nrow(subdominant.df))
     topfreq <- rbind(dominant.df,subdominant.df)
     
     colnames(topfreq) <- c("Sample", "Frequency", "aminoAcid")
