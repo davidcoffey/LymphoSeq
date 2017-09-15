@@ -1,13 +1,9 @@
 LymphoSeq News
 
-<<<<<<< HEAD
-Version 1.3.0 [April 14, 2017]
-=======
 Version 1.4.1 [Septembe 15, 2017]
  * Fixed bug in topSeqPlot
 
 Version 1.4.0 [April 14, 2017]
->>>>>>> 75ae2b3... Updated news
  * Added function alignSeq
  * Added funciton phyloSeq
  * Added function exportFasta
