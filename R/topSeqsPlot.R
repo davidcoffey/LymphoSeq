@@ -17,12 +17,14 @@
 #' 
 #' file.list <- readImmunoSeq(path = file.path)
 #' 
-#' topSeqsPlot(list = file.list, top = 10)
+#' productive.aa <- productiveSeq(file.list = file.list, aggregate = "aminoAcid")
+#' 
+#' topSeqsPlot(list = productive.aa, top = 10)
 #' 
 #' # Display the number of sequences at the top of bar plot and add a title
-#' n <- as.character(lapply(file.list, nrow))
+#' n <- as.character(lapply(productive.aa, nrow))
 #' 
-#' topSeqsPlot(list = file.list, top = 10) + 
+#' topSeqsPlot(list = productive.aa, top = 10) + 
 #'    ggplot2::annotate("text", x = 1:length(file.list), y = 105, label = n, color = "black") +
 #'    ggplot2::expand_limits(y = c(0, 110)) + ggplot2::ggtitle("Figure Title") + 
 #'    ggplot2::scale_x_discrete(limits = names(file.list))
@@ -45,7 +47,7 @@ topSeqsPlot <- function(list, top = 10) {
     subdominant.df <- plyr::ldply(subdominant, data.frame)
     
     dominant.df$aminoAcid <- aminoAcid.df$X..i..
-    subdominant.df$aminoAcid <- rep("All other sequences", ncol(subdominant.df))
+    subdominant.df$aminoAcid <- rep("All other sequences", nrow(subdominant.df))
     topfreq <- rbind(dominant.df,subdominant.df)
     
     colnames(topfreq) <- c("Sample", "Frequency", "aminoAcid")
