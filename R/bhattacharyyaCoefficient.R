@@ -26,6 +26,7 @@ bhattacharyyaCoefficient <- function(sample1, sample2) {
     p$frequencyCount <- p$frequencyCount/100
     q <- sample2[which(sample2[, "aminoAcid"] %in% sample1[, "aminoAcid"]), ]
     q$frequencyCount <- q$frequencyCount/100
+    p <- p[match(q$aminoAcid, p$aminoAcid),]
     s <- p[, "frequencyCount"] * q[, "frequencyCount"]
     bc <- sum(sqrt(s))
     return(bc)
