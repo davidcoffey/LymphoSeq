@@ -4,8 +4,8 @@
 \alias{cloneTrack}
 \title{Clone tracking plot}
 \usage{
-cloneTrack(sequence.matrix, map = "none", productive.aa, label = "none",
-  track = "none", unassigned = TRUE)
+cloneTrack(sequence.matrix, map = "none", productive.aa,
+  label = "none", track = "none", unassigned = TRUE)
 }
 \arguments{
 \item{sequence.matrix}{A sequence matrix generated from the LymphoSeq 
