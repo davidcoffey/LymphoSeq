@@ -71,12 +71,12 @@ searchSeq <- function(list, sequence, type = "aminoAcid", match = "global", edit
                     ed.j <- ed[ed.index[j, "row"], ed.index[j, "col"]]
                     ed.subset <- c(ed.subset, ed.j)
                 }
-                results <- data.frame(searchSequnece = rownames(ed)[ed.index[, 1]], 
-                                      foundSequnece = colnames(ed)[ed.index[, 2]], 
+                results <- data.frame(searchSequence = rownames(ed)[ed.index[, 1]], 
+                                      foundSequence = colnames(ed)[ed.index[, 2]], 
                                       editDistance = ed.subset)
                 results <- results[!duplicated(results), ]
                 search <- plyr::llply(list[i], function(x) 
-                    x[which(x[, type] %in% results$foundSequnece), ])
+                    x[which(x[, type] %in% results$foundSequence), ])
                 found <- NULL
                 k <- 1
                 for (k in 1:length(search)) {
@@ -87,15 +87,15 @@ searchSeq <- function(list, sequence, type = "aminoAcid", match = "global", edit
                         found <- rbind(found, search[[k]])
                     }
                 }
-                names(found)[which(names(found) == type)] <- "foundSequnece"
+                names(found)[which(names(found) == type)] <- "foundSequence"
                 merged.search <- merge(results, found)
                 merged.results <- rbind(merged.results, merged.search)
                 merged.results <- merged.results[c("sample", setdiff(names(merged.results), "sample"))]
             }
         }
         if (nrow(merged.results) >= 1) {
-            merged.results$foundSequnece = as.character(merged.results$foundSequnece)
-            merged.results$searchSequnece = as.character(merged.results$searchSequnece)
+            merged.results$foundSequence = as.character(merged.results$foundSequence)
+            merged.results$searchSequence = as.character(merged.results$searchSequence)
             merged.results = merged.results[order(merged.results$frequencyCount, decreasing = TRUE),]
             rownames(merged.results) = NULL
             return(merged.results)
