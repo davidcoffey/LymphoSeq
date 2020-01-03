@@ -38,6 +38,7 @@ clonalRelatedness <- function(list, editDistance = 10){
     i <- 2
     for(i in 1:length(list)){
         file <- list[[i]]
+        file <- data.frame(file)
         top <- file[order(file$count, decreasing = TRUE), "nucleotide"][1]
         result1 <- length(which(
             stringdist::stringdist(top, file$nucleotide, 
