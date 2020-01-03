@@ -4,7 +4,7 @@
 #' samples.
 #' 
 #' @param sample A data frame consisting of frequencies of antigen receptor 
-#' sequences.  "vFamilyName", "jFamilyName", and if applicable, "dFamilyName" 
+#' sequences.  "vFamily", "jFamily", and if applicable, "dFamily" 
 #' are a required columns.  Using output from the LymphoSeq function topSeqs is
 #' recommended.
 #' @param association A character vector of gene familes to associate.  Options 
@@ -36,14 +36,14 @@
 #' @importFrom circlize colorRamp2 chordDiagram
 chordDiagramVDJ <- function(sample, association = "VJ", colors = c("red", "blue")) {
     if (association == "VJ") {
-        if (!all(c("vFamilyName", "jFamilyName") %in% colnames(sample))) {
-            stop("The source data frame does not contain the required columns 'vFamilyName' and 'jFamilyName'.")
+        if (!all(c("vFamily", "jFamily") %in% colnames(sample))) {
+            stop("The source data frame does not contain the required columns 'vFamily' and 'jFamily'.")
         }
-        vj <- sample[, c("vFamilyName", "jFamilyName")]
+        vj <- sample[, c("vFamily", "jFamily")]
         vj[is.na(vj) | vj == ""] <- "Unresolved"
-        vj$vFamilyName <- as.character(vj$vFamilyName)
-        vj$jFamilyName <- as.character(vj$jFamilyName)
-        table <- table(vj$vFamilyName, vj$jFamilyName)
+        vj$vFamily <- as.character(vj$vFamily)
+        vj$jFamily <- as.character(vj$jFamily)
+        table <- table(vj$vFamily, vj$jFamily)
         matrix <- as.matrix(as.data.frame.matrix(table))
         ribbon.color <- circlize::colorRamp2(range(matrix), c("grey", "black"))
         circlize::chordDiagram(matrix, 
@@ -52,14 +52,14 @@ chordDiagramVDJ <- function(sample, association = "VJ", colors = c("red", "blue"
                                col = ribbon.color)
     }
     if (association == "DJ") {
-        if (!all(c("dFamilyName", "jFamilyName") %in% colnames(sample))) {
-            stop("The source data frame does not contain the required columns 'dFamilyName' and 'jFamilyName'.")
+        if (!all(c("dFamily", "jFamily") %in% colnames(sample))) {
+            stop("The source data frame does not contain the required columns 'dFamily' and 'jFamily'.")
         }
-        dj <- sample[, c("dFamilyName", "jFamilyName")]
+        dj <- sample[, c("dFamily", "jFamily")]
         dj[is.na(dj) | dj == ""] <- "Unresolved"
-        dj$dFamilyName <- as.character(dj$dFamilyName)
-        dj$jFamilyName <- as.character(dj$jFamilyName)
-        table <- table(dj$dFamilyName, dj$jFamilyName)
+        dj$dFamily <- as.character(dj$dFamily)
+        dj$jFamily <- as.character(dj$jFamily)
+        table <- table(dj$dFamily, dj$jFamily)
         matrix <- as.matrix(as.data.frame.matrix(table))
         ribbon.color <- circlize::colorRamp2(range(matrix), c("grey", "black"))
         circlize::chordDiagram(matrix, 
