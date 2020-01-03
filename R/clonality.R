@@ -46,7 +46,7 @@ clonality <- function(file.list) {
         file <- file.list[[i]]
         total.reads <- nrow(file)
         total.count <- sum(file$count)
-        productive <- file[!grepl("\\*", file$aminoAcid) & file$aminoAcid != "", ]
+        productive <- file[file$`function` == "in-frame", ]
         frequency <- productive$count/sum(productive$count)
         entropy <- -sum(frequency * log2(frequency), na.rm = TRUE)
         unique.productive <- nrow(productive)
