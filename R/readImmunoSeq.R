@@ -52,7 +52,8 @@
 #'                            recursive = FALSE)
 #' @export
 #' @importFrom data.table fread
-#' @importFrom plyr llply
+#' @importFrom plyr llply 
+#' @import tidyverse
 library(tidyverse)
 
 readAdaptiveV1 <- function(clone_file) {
