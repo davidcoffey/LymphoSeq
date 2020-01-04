@@ -26,33 +26,85 @@ assigned according to the original ImmunoSEQ file names.
 }
 \description{
 Imports tab-separated value (.tsv) files exported by the Adaptive 
-Biotechnologies ImmunoSEQ analyzer and stores them as a list of data frames.
+Biotechnologies ImmunoSEQ analyzer and BGI IR-SEQ and stores them as a list of data frames.
 }
 \details{
 May import tab-delimited files containing antigen receptor 
 sequencing from other sources (e.g. miTCR or miXCR) as long as the column 
 names are the same as used by ImmunoSEQ files.  Available column headings in 
 ImmunoSEQ files are:  
-"nucleotide", "aminoAcid", "count", "count (templates)", "count (reads)", 
-"count (templates/reads)", "frequencyCount", "frequencyCount (\%)", "cdr3Length", 
-"vMaxResolved", "vFamilyName", "vGeneName", "vGeneAllele", "vFamilyTies", 
-"vGeneNameTies", "vGeneAlleleTies", "dMaxResolved", "dFamilyName", "dGeneName", 
-"dGeneAllele", "dFamilyTies", "dGeneNameTies", "dGeneAlleleTies", "jMaxResolved", 
-"jFamilyName", "jGeneName", "jGeneAllele", "jFamilyTies", "jGeneNameTies", 
-"jGeneAlleleTies", "vDeletion", "d5Deletion", "d3Deletion", "jDeletion", 
-"n2Insertion", "n1Insertion", "vIndex", "n2Index", "dIndex", "n1Index", 
-"jIndex", "estimatedNumberGenomes", "sequenceStatus", "cloneResolved", 
-"vOrphon", "dOrphon", "jOrphon", "vFunction", "dFunction", "jFunction", 
-"fractionNucleated".  
- 
-IMPORTANT: be aware that Adaptive has changed the 
-column names of their files over time and if the headings of your files are 
-inconsistent, then specify column = "all" or include all variations of the 
-headings you want to important.  For example, column = c("count", 
-"count (templates)", "count (reads)").  Also be aware that the "count" 
-column previously reported the number of sequencing reads in earlier 
-versions of ImmunoSEQ but now is equivalent to the 
-"estimatedNumberGenomes" column.
+
+adaptiveV1:
+
+column list:
+nucleotide,aminoAcid,count (reads),frequencyCount (%),cdr3Length,vMaxResolved,vFamilyName,
+vGeneName,vGeneAllele,vFamilyTies,vGeneNameTies,vGeneAlleleTies,dMaxResolved,dFamilyName,
+dGeneName,dGeneAllele,dFamilyTies,dGeneNameTies,dGeneAlleleTies,jMaxResolved,jFamilyName,
+jGeneName,jGeneAllele,jFamilyTies,jGeneNameTies,jGeneAlleleTies,vDeletion,n1Insertion,
+d5Deletion,d3Deletion,n2Insertion,jDeletion,vIndex,n1Index,dIndex,n2Index,jIndex,
+estimatedNumberGenomes,sequenceStatus,cloneResolved,vOrphon,dOrphon,jOrphon,vFunction,
+dFunction,jFunction,fractionNucleated,vAlignLength,vAlignSubstitutionCount,
+vAlignSubstitutionIndexes,vAlignSubstitutionGeneThreePrimeIndexes,vSeqWithMutations
+
+minimum required columns:
+nucleotide,aminoAcid,count (reads),frequencyCount (%), vFamilyName, vGeneName,
+dFamilyName, dGeneName, jGeneName, jFamilyName, estimatedNumberGenomes, sequenceStatus
+
+adaptiveV2:
+
+column list:
+nucleotide,aminoAcid,count (templates/reads),frequencyCount (%),cdr3Length,vMaxResolved,
+vFamilyName,vGeneName,vGeneAllele,vFamilyTies,vGeneNameTies,vGeneAlleleTies,dMaxResolved,
+dFamilyName,dGeneName,dGeneAllele,dFamilyTies,dGeneNameTies,dGeneAlleleTies,jMaxResolved,
+jFamilyName,jGeneName,jGeneAllele,jFamilyTies,jGeneNameTies,jGeneAlleleTies,vDeletion,
+n1Insertion,d5Deletion,d3Deletion,n2Insertion,jDeletion,vIndex,n1Index,dIndex,n2Index,
+jIndex,estimatedNumberGenomes,sequenceStatus,cloneResolved,vOrphon,dOrphon,jOrphon,vFunction,
+dFunction,jFunction,fractionNucleated,vAlignLength,vAlignSubstitutionCount,vAlignSubstitutionIndexes,
+vAlignSubstitutionGeneThreePrimeIndexes,vSeqWithMutations
+
+minimum required columns:
+nucleotide,aminoAcid,count (templates/reads),frequencyCount (%), vFamilyName, vGeneName,
+dFamilyName, dGeneName, jGeneName, jFamilyName, estimatedNumberGenomes, sequenceStatus
+
+
+adaptiveV3:
+
+column list:
+nucleotide,aminoAcid,count,(templates),frequencyCount,(%),cdr3Length,vMaxResolved,vFamilyName,
+vGeneName,vGeneAllele,vFamilyTies,vGeneNameTies,vGeneAlleleTies,dMaxResolved,dFamilyName,dGeneName,
+dGeneAllele,dFamilyTies,dGeneNameTies,dGeneAlleleTies,jMaxResolved,jFamilyName,jGeneName,
+jGeneAllele,jFamilyTies,jGeneNameTies,jGeneAlleleTies,vDeletion,n1Insertion,d5Deletion,d3Deletion,
+n2Insertion,jDeletion,vIndex,n1Index,dIndex,n2Index,jIndex,estimatedNumberGenomes,sequenceStatus,
+cloneResolved,vOrphon,dOrphon,jOrphon,vFunction,dFunction,jFunction,fractionNucleated
+
+minimum required columns:
+nucleotide,aminoAcid,count (templates),frequencyCount (%), vFamilyName, vGeneName,
+dFamilyName, dGeneName, jGeneName, jFamilyName, estimatedNumberGenomes, sequenceStatus
+
+
+adaptiveV4:
+
+column list:
+nucleotide.CDR3.in.lowercase.,aminoAcid.CDR3.in.lowercase.,cloneCount,clonefrequency....,
+CDR3Length,vGene,dGene,jGene,vDeletion,d5Deletion,d3Deletion,jDeletion,vdInsertion,
+djInsertion,vjInsertion,fuction,CDR3.stripped.x.a
+
+minimum required columns:
+nucleotide.CDR3.in.lowercase.,aminoAcid.CDR3.in.lowercase.,cloneCount,clonefrequency....,
+vGene,dGene,jGene,fuction
+
+bgiClone:
+
+column list:
+nucleotide(CDR3 in lowercase),aminoAcid(CDR3 in lowercase),cloneCount,clonefrequency (%),
+CDR3Length,vGene,dGene,jGene,vDeletion,d5Deletion,d3Deletion,jDeletion,vdInsertion,
+djInsertion,vjInsertion,fuction
+
+minimum required columns:
+nucleotide(CDR3 in lowercase),aminoAcid(CDR3 in lowercase),cloneCount,clonefrequency (%),
+vGene,dGene, fuction
+
+
 }
 \examples{
 file.path <- system.file("extdata", "TCRB_sequencing", package = "LymphoSeq")
