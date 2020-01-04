@@ -46,12 +46,12 @@
 #'          
 #' @export
 #' @import ggtree
-#' @import ggplot2
+#' @import ggplot
 #' @importFrom phangorn NJ
 phyloTree <- function(list, sample, type = "nucleotide", layout = "rectangular", label = TRUE) {
     file <- list[[sample]]
-    if(length(grep(pattern = "vFamilyName|dFamilyName|jFamilyName|count", names(file))) != 4){
-        stop("vFamilyName, dFamilyName, jFamilyName, nucleotide, and count are required columns.  Try aggregating the sequences by 'nucleotide' usng the function productiveSeq.", call. = FALSE)
+    if(length(grep(pattern = "vFamily|dFamily|jFamily|count", names(file))) != 4){
+        stop("vFamily, dFamily, jFamily, nucleotide, and count are required columns.  Try aggregating the sequences by 'nucleotide' usng the function productiveSeq.", call. = FALSE)
     }
     if(nrow(file) < 3){
         stop("Cannot draw phlogenetic tree with less than 3 sequences.", call. = FALSE)
@@ -70,7 +70,7 @@ phyloTree <- function(list, sample, type = "nucleotide", layout = "rectangular",
         names <- file$aminoAcid
     }
     tree <- phangorn::NJ(distance)
-    geneFamilies <- paste(file$vFamilyName, file$dFamilyName, file$jFamilyName)
+    geneFamilies <- paste(file$vFamily, file$dFamily, file$jFamily)
     geneFamilies <- gsub(geneFamilies, pattern = "IGH|IGL|IGK|TCRB|TCRA", replacement = "")
     geneFamilies <- gsub(geneFamilies, pattern = "unresolved", replacement = "UNR")
     tree.annotation <- data.frame(names = names, count = file$count, 
