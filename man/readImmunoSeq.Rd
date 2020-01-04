@@ -4,21 +4,16 @@
 \alias{readImmunoSeq}
 \title{Read ImmunoSeq files}
 \usage{
-readImmunoSeq(path, columns = c("aminoAcid", "nucleotide", "count",
-  "count (templates)", "count (reads)", "count (templates/reads)",
-  "frequencyCount", "frequencyCount (\%)", "estimatedNumberGenomes",
-  "vFamilyName", "dFamilyName", "jFamilyName", "vGeneName", "dGeneName",
-  "jGeneName"), recursive = FALSE)
+readImmunoSeq(path, mode="adaptiveV2", recursive = FALSE)
 }
 \arguments{
 \item{path}{Path to the directory containing tab-delimited files.  Only 
 files with the extension .tsv are imported.  The names of the data frames are 
 the same as names of the files.}
 
-\item{columns}{Column names from the tab-delimited files that you desire to 
-import, all others will be disregarded.  May use "all" to import all columns.  
-A warning may be called if columns contain no data or must be coereced to a 
-different class.  Usually this warning can be ignored.}
+\item{mode}{Mode specifies the type of input file LymphoSeq is reading.
+Mode defaults adaptiveV2 if nothing is specified. Avaiable modes include
+adaptiveV1, adaptiveV2, adaptiveV3, adaptiveV4, bgiClone}
 
 \item{recursive}{A Boolean value indicating whether tab-delimited files in 
 subdirectories should be imported.  If TRUE, then all files in the parent as 
