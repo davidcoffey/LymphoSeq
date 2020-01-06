@@ -18,26 +18,76 @@
 #' sequencing from other sources (e.g. miTCR or miXCR) as long as the column 
 #' names are the same as used by ImmunoSEQ files.  Available column headings in 
 #' ImmunoSEQ files are:  
-#' "nucleotide", "aminoAcid", "count", "count (templates)", "count (reads)", 
-#' "count (templates/reads)", "frequencyCount", "frequencyCount (\%)", "cdr3Length", 
-#' "vMaxResolved", "vFamilyName", "vGeneName", "vGeneAllele", "vFamilyTies", 
-#' "vGeneNameTies", "vGeneAlleleTies", "dMaxResolved", "dFamilyName", "dGeneName", 
-#' "dGeneAllele", "dFamilyTies", "dGeneNameTies", "dGeneAlleleTies", "jMaxResolved", 
-#' "jFamilyName", "jGeneName", "jGeneAllele", "jFamilyTies", "jGeneNameTies", 
-#' "jGeneAlleleTies", "vDeletion", "d5Deletion", "d3Deletion", "jDeletion", 
-#' "n2Insertion", "n1Insertion", "vIndex", "n2Index", "dIndex", "n1Index", 
-#' "jIndex", "estimatedNumberGenomes", "sequenceStatus", "cloneResolved", 
-#' "vOrphon", "dOrphon", "jOrphon", "vFunction", "dFunction", "jFunction", 
-#' "fractionNucleated".  
-#'  
-#' IMPORTANT: be aware that Adaptive has changed the 
-#' column names of their files over time and if the headings of your files are 
-#' inconsistent, then specify column = "all" or include all variations of the 
-#' headings you want to important.  For example, column = c("count", 
-#' "count (templates)", "count (reads)").  Also be aware that the "count" 
-#' column previously reported the number of sequencing reads in earlier 
-#' versions of ImmunoSEQ but now is equivalent to the 
-#' "estimatedNumberGenomes" column.
+#'     
+#'     adaptiveV1:
+#'     
+#'     column list:
+#'     nucleotide,aminoAcid,count (reads),frequencyCount (%),cdr3Length,vMaxResolved,vFamilyName,
+#' vGeneName,vGeneAllele,vFamilyTies,vGeneNameTies,vGeneAlleleTies,dMaxResolved,dFamilyName,
+#' dGeneName,dGeneAllele,dFamilyTies,dGeneNameTies,dGeneAlleleTies,jMaxResolved,jFamilyName,
+#' jGeneName,jGeneAllele,jFamilyTies,jGeneNameTies,jGeneAlleleTies,vDeletion,n1Insertion,
+#' d5Deletion,d3Deletion,n2Insertion,jDeletion,vIndex,n1Index,dIndex,n2Index,jIndex,
+#' estimatedNumberGenomes,sequenceStatus,cloneResolved,vOrphon,dOrphon,jOrphon,vFunction,
+#' dFunction,jFunction,fractionNucleated,vAlignLength,vAlignSubstitutionCount,
+#' vAlignSubstitutionIndexes,vAlignSubstitutionGeneThreePrimeIndexes,vSeqWithMutations
+#' 
+#' minimum required columns:
+#'     nucleotide,aminoAcid,count (reads),frequencyCount (%), vFamilyName, vGeneName,
+#' dFamilyName, dGeneName, jGeneName, jFamilyName, estimatedNumberGenomes, sequenceStatus
+#' 
+#' adaptiveV2:
+#'     
+#'     column list:
+#'     nucleotide,aminoAcid,count (templates/reads),frequencyCount (%),cdr3Length,vMaxResolved,
+#' vFamilyName,vGeneName,vGeneAllele,vFamilyTies,vGeneNameTies,vGeneAlleleTies,dMaxResolved,
+#' dFamilyName,dGeneName,dGeneAllele,dFamilyTies,dGeneNameTies,dGeneAlleleTies,jMaxResolved,
+#' jFamilyName,jGeneName,jGeneAllele,jFamilyTies,jGeneNameTies,jGeneAlleleTies,vDeletion,
+#' n1Insertion,d5Deletion,d3Deletion,n2Insertion,jDeletion,vIndex,n1Index,dIndex,n2Index,
+#' jIndex,estimatedNumberGenomes,sequenceStatus,cloneResolved,vOrphon,dOrphon,jOrphon,vFunction,
+#' dFunction,jFunction,fractionNucleated,vAlignLength,vAlignSubstitutionCount,vAlignSubstitutionIndexes,
+#' vAlignSubstitutionGeneThreePrimeIndexes,vSeqWithMutations
+#' 
+#' minimum required columns:
+#'     nucleotide,aminoAcid,count (templates/reads),frequencyCount (%), vFamilyName, vGeneName,
+#' dFamilyName, dGeneName, jGeneName, jFamilyName, estimatedNumberGenomes, sequenceStatus
+#' 
+#' 
+#' adaptiveV3:
+#'     
+#'     column list:
+#'     nucleotide,aminoAcid,count,(templates),frequencyCount,(%),cdr3Length,vMaxResolved,vFamilyName,
+#' vGeneName,vGeneAllele,vFamilyTies,vGeneNameTies,vGeneAlleleTies,dMaxResolved,dFamilyName,dGeneName,
+#' dGeneAllele,dFamilyTies,dGeneNameTies,dGeneAlleleTies,jMaxResolved,jFamilyName,jGeneName,
+#' jGeneAllele,jFamilyTies,jGeneNameTies,jGeneAlleleTies,vDeletion,n1Insertion,d5Deletion,d3Deletion,
+#' n2Insertion,jDeletion,vIndex,n1Index,dIndex,n2Index,jIndex,estimatedNumberGenomes,sequenceStatus,
+#' cloneResolved,vOrphon,dOrphon,jOrphon,vFunction,dFunction,jFunction,fractionNucleated
+#' 
+#' minimum required columns:
+#'     nucleotide,aminoAcid,count (templates),frequencyCount (%), vFamilyName, vGeneName,
+#' dFamilyName, dGeneName, jGeneName, jFamilyName, estimatedNumberGenomes, sequenceStatus
+#' 
+#' 
+#' adaptiveV4:
+#'     
+#'     column list:
+#'     nucleotide.CDR3.in.lowercase.,aminoAcid.CDR3.in.lowercase.,cloneCount,clonefrequency....,
+#' CDR3Length,vGene,dGene,jGene,vDeletion,d5Deletion,d3Deletion,jDeletion,vdInsertion,
+#' djInsertion,vjInsertion,fuction,CDR3.stripped.x.a
+#' 
+#' minimum required columns:
+#'     nucleotide.CDR3.in.lowercase.,aminoAcid.CDR3.in.lowercase.,cloneCount,clonefrequency....,
+#' vGene,dGene,jGene,fuction
+#' 
+#' bgiClone:
+#'     
+#'     column list:
+#'     nucleotide(CDR3 in lowercase),aminoAcid(CDR3 in lowercase),cloneCount,clonefrequency (%),
+#' CDR3Length,vGene,dGene,jGene,vDeletion,d5Deletion,d3Deletion,jDeletion,vdInsertion,
+#' djInsertion,vjInsertion,fuction
+#' 
+#' minimum required columns:
+#'     nucleotide(CDR3 in lowercase),aminoAcid(CDR3 in lowercase),cloneCount,clonefrequency (%),
+#' vGene,dGene, fuction
 #' @return Returns a list of data frames.  The names of each data frame are
 #' assigned according to the original ImmunoSEQ file names.
 #' @examples
@@ -55,132 +105,121 @@
 #' @importFrom plyr llply 
 #' @import tidyverse
 library(tidyverse)
-
-readAdaptiveV1 <- function(clone_file) {
-    col_old = cols_only("nucleotide" = col_character(), "aminoAcid" = col_character(), 
-        "count (reads)" = col_integer(), "frequencyCount (%)" = col_double(),
-        "vGeneName" = col_character(), "dGeneName" = col_character(), "jGeneName" = col_character(), 
-        "vFamilyName" = col_character(), "dFamilyName" = col_character(), "jFamilyName" = col_character(),
-        "sequenceStatus" = col_character(), "estimatedNumberGenomes" = col_integer())
-    col_std = c(nucleotide = "nucleotide", aminoAcid = "aminoAcid", count = "count (reads)", 
-            frequencyCount = "frequencyCount (%)", vFamily = "vFamilyName", vGene = "vGeneName", 
-            dFamily = "dFamilyName", dGene = "dGeneName", jFamily = "jFamilyName", jGene = "jGeneName",
-            `function` = "sequenceStatus", estimatedNumberGenomes = "estimatedNumberGenomes")
-    file_names <- tools::file_path_sans_ext(basename(clone_file))
-    #names(file_list) <- file_names
-    clone_frame <- readr::read_tsv(clone_file, col_types = col_old,
-                                    na = c("", "NA", "Nan", "NaN"), trim_ws = TRUE,
-                                    progress = show_progress())
-    clone_frame <- clone_frame %>% rename(!!col_std)
-    clone_frame <- clone_frame %>% mutate(`function`= str_replace(`function`, "In", "in-frame"))
-    clone_frame <- clone_frame %>% add_column(sample=file_names)
-    return(clone_frame)
-}
-
-readAdaptiveV2 <- function(clone_file) {
-    col_old = cols_only("nucleotide" = col_character(), "aminoAcid" = col_character(), 
-        "count (templates/reads)" = col_integer(), "frequencyCount (%)" = col_double(),
-        "vGeneName" = col_character(), "dGeneName" = col_character(), "jGeneName" = col_character(), 
-        "vFamilyName" = col_character(), "dFamilyName" = col_character(), "jFamilyName" = col_character(),
-        "sequenceStatus" = col_character(), "estimatedNumberGenomes" = col_integer())
-    col_std = c(nucleotide = "nucleotide", aminoAcid = "aminoAcid", count = "count (templates/reads)", 
-            frequencyCount = "frequencyCount (%)", vFamily = "vFamilyName", vGene = "vGeneName", 
-            dFamily = "dFamilyName", dGene = "dGeneName", jFamily = "jFamilyName", jGene = "jGeneName",
-            `function` = "sequenceStatus", estimatedNumberGenomes = "estimatedNumberGenomes")
-    file_names <- tools::file_path_sans_ext(basename(clone_file))
-    #names(file_list) <- file_names
-    clone_frame <- readr::read_tsv(clone_file, col_types = col_old,
-                                    na = c("", "NA", "Nan", "NaN"), trim_ws = TRUE,
-                                    progress = show_progress())
-    clone_frame <- clone_frame %>% rename(!!col_std)
-    clone_frame <- clone_frame %>% mutate(`function`= str_replace(`function`, "In", "in-frame"))
-    clone_frame <- clone_frame %>% add_column(sample=file_names)
-    return(clone_frame)
-}
-
-readAdaptiveV3 <- function(clone_file) {
-    col_old = cols_only("nucleotide" = col_character(), "aminoAcid" = col_character(), 
-        "count (templates)" = col_integer(), "frequencyCount (%)" = col_double(),
-        "vGeneName" = col_character(), "dGeneName" = col_character(), "jGeneName" = col_character(), 
-        "vFamilyName" = col_character(), "dFamilyName" = col_character(), "jFamilyName" = col_character(),
-        "sequenceStatus" = col_character(), "estimatedNumberGenomes" = col_integer())
-    col_std = c(nucleotide = "nucleotide", aminoAcid = "aminoAcid", count = "count (templates)", 
-            frequencyCount = "frequencyCount (%)", vFamily = "vFamilyName", vGene = "vGeneName", 
-            dFamily = "dFamilyName", dGene = "dGeneName", jFamily = "jFamilyName", jGene = "jGeneName",
-            `function` = "sequenceStatus", estimatedNumberGenomes = "estimatedNumberGenomes")
-    file_names <- tools::file_path_sans_ext(basename(clone_file))
-    #names(file_list) <- file_names
-    clone_frame <- readr::read_tsv(clone_file, col_types = col_old,
-                                    na = c("", "NA", "Nan", "NaN"), trim_ws = TRUE,
-                                    progress = show_progress())
-    clone_frame <- clone_frame %>% rename(!!col_std)
-    clone_frame <- clone_frame %>% mutate(`function`= str_replace(`function`, "In", "in-frame"))
-    clone_frame <- clone_frame %>% add_column(sample=file_names)
-    return(clone_frame)
-}
-
-readAdaptiveV4 <- function(clone_file) {
-    col_old = cols_only("nucleotide.CDR3.in.lowercase." = col_character(), 
-        "aminoAcid.CDR3.in.lowercase." = col_character(), "cloneCount" = col_integer(), 
-        "clonefrequency...." = col_double(), "vGene" = col_character(), "dGene" = col_character(),
-        "jGene" = col_character(), "fuction" = col_character())
-    col_std = c(nucleotide = "nucleotide.CDR3.in.lowercase.", 
-        aminoAcid = "aminoAcid.CDR3.in.lowercase.", count = "cloneCount", 
-        frequencyCount = "clonefrequency....", vGene = "vGene", dGene = "dGene", jGene = "jGene",
-        `function` = "fuction")
-    file_names <- tools::file_path_sans_ext(basename(clone_file))
-    clone_frame <- readr::read_tsv(clone_file, col_types = col_old,
-                                    na = c("", "NA", "Nan", "NaN"), trim_ws = TRUE,
-                                    progress = show_progress())
-    clone_frame <- clone_frame %>% rename(!!col_std)
-    clone_frame <- clone_frame %>% extract(nucleotide, c("nucleotide"), regex = "([acgt]+)")
-    clone_frame <- clone_frame %>% mutate(nucleotide  = toupper(nucleotide))
-    clone_frame <- clone_frame %>% extract(aminoAcid, c("aminoAcid"), regex = "([acdefghiklmnpqrstvwy]+)")
-    clone_frame <- clone_frame %>% mutate(aminoAcid = toupper(aminoAcid))
-    clone_frame <- clone_frame %>% separate(vGene, c("vFamily"), sep = '-', remove = FALSE)
-    clone_frame <- clone_frame %>% separate(dGene, c("dFamily"), sep = '-', remove = FALSE)
-    clone_frame <- clone_frame %>% separate(jGene, c("jFamily"), sep = '-', remove = FALSE)
-    clone_frame <- clone_frame %>% add_column(sample=file_names)
-
-    clone_frame <- clone_frame %>% group_by(nucleotide) %>% 
-        summarize(aminoAcid = first(aminoAcid), `count` = sum(`count`), vGene = first(vGene), `function` = first(`function`),
-        jGene = first(jGene), dGene = first(dGene)) %>% mutate(frequencyCount = `count` / sum(`count`))
-    clone_frame <- clone_frame %>% add_colunn(estimatedNumberGenomes=`count`)
-    return(clone_frame)
-}
-
-readBGIclone <- function(clone_file) {
-    col_old <- cols_only("nucleotide(CDR3 in lowercase)" = col_character(), 
-        "aminoAcid(CDR3 in lowercase)" = col_character(), "cloneCount" = col_integer(),
-        "clonefrequency (%)" = col_double(), "vGene" = col_character(), "dGene" = col_character(),
-        "jGene" = col_character(), "fuction" = col_character())
-    col_std <- c(nucleotide = "nucleotide(CDR3 in lowercase)", 
-        aminoAcid = "aminoAcid(CDR3 in lowercase)", count = "cloneCount", 
-        frequencyCount = "clonefrequency (%)", vGene = "vGene", dGene = "dGene", jGene = "jGene",
-        `function` = "fuction")
-    file_names <- tools::file_path_sans_ext(basename(clone_file))
-    clone_frame <- readr::read_tsv(clone_file, col_types = col_old,
-                                    na = c("", "NA", "Nan", "NaN"), trim_ws = TRUE,
-                                    progress = show_progress())
-    clone_frame <- clone_frame %>% rename(!!col_std)
-    clone_frame <- clone_frame %>% extract(nucleotide, c("nucleotide"), regex = "([acgt]+)")
-    clone_frame <- clone_frame %>% mutate(nucleotide  = toupper(nucleotide))
-    clone_frame <- clone_frame %>% extract(aminoAcid, c("aminoAcid"), regex = "([acdefghiklmnpqrstvwy]+)")
-    clone_frame <- clone_frame %>% mutate(aminoAcid = toupper(aminoAcid))
-    clone_frame <- clone_frame %>% separate(vGene, c("vFamily"), sep = '-', remove = FALSE)
-    clone_frame <- clone_frame %>% separate(dGene, c("dFamily"), sep = '-', remove = FALSE)
-    clone_frame <- clone_frame %>% separate(jGene, c("jFamily"), sep = '-', remove = FALSE)
-    clone_frame <- clone_frame %>% add_column(sample=file_names)
-
-    clone_frame <- clone_frame %>% group_by(nucleotide) %>% 
-        summarize(aminoAcid = first(aminoAcid), `count` = sum(`count`), vGene = first(vGene), `function` = first(`function`),
-        jGene = first(jGene), dGene = first(dGene)) %>% mutate(frequencyCount = `count` / sum(`count`))
+getFileType <- function(clone_file) {
+    adaptiveV1 <- c("nucleotide", "aminoAcid", "count (reads)", "frequencyCount (%)", "vGeneName", 
+        "dGeneName", "jGeneName", "vFamilyName", "dFamilyName", "jFamilyName", "sequenceStatus", 
+        "estimatedNumberGenomes")
+        
+    adaptiveV2 <- c("nucleotide", "aminoAcid", "count (templates/reads)", "frequencyCount (%)", "vGeneName", 
+        "dGeneName", "jGeneName", "vFamilyName", "dFamilyName", "jFamilyName", "sequenceStatus", 
+        "estimatedNumberGenomes")
     
-    clone_frame <- clone_frame %>% add_colunn(estimatedNumberGenomes=`count`)
+    adaptiveV3 <- c("nucleotide", "aminoAcid", "count (templates)", "frequencyCount (%)", "vGeneName", 
+        "dGeneName", "jGeneName", "vFamilyName", "dFamilyName", "jFamilyName", "sequenceStatus", 
+        "estimatedNumberGenomes")
+    
+    adaptiveV4 <- c("nucleotide.CDR3.in.lowercase.", "aminoAcid.CDR3.in.lowercase.", "cloneCount", 
+        "clonefrequency....", "vGene", "dGene", "jGene", "fuction")
+
+    bgiClone <- c("nucleotide(CDR3 in lowercase)", "aminoAcid(CDR3 in lowercase)", "cloneCount",
+        "clonefrequency (%)", "vGene", "dGene", "jGene", "fuction")
+
+    columns <- invisible(colnames(readr::read_tsv(clone_file, n_max=1, col_types = cols())))
+    if (all(adaptiveV1 %in% columns)) {
+        file_type <- "adaptiveV1"
+        header_list <- cols_only(nucleotide = "c", aminoAcid = "c", `count (reads)` = "i", 
+                `frequencyCount (%)` = "d", vGeneName = "c", dGeneName = "c", 
+                jGeneName = "c", vFamilyName = "c", dFamilyName = "c", 
+                jFamilyName = "c", sequenceStatus = "c", estimatedNumberGenomes = "i")
+    } else if (all(adaptiveV2 %in% columns)) {
+        file_type <- "adaptiveV2"
+        header_list <- cols_only(nucleotide = "c", aminoAcid = "c", `count (templates/reads)` = "i", 
+                `frequencyCount (%)` = "d", vGeneName = "c", dGeneName = "c", 
+                jGeneName = "c", vFamilyName = "c", dFamilyName = "c", 
+                jFamilyName = "c", sequenceStatus = "c", estimatedNumberGenomes = "i")
+    } else if (all(adaptiveV3 %in% columns)) {
+        file_type <- "adaptiveV3"
+        header_list <- cols_only(nucleotide = "c", aminoAcid = "c", `count (templates)` = "i", 
+                `frequencyCount (%)` = "d", vGeneName = "c", dGeneName = "c", 
+                jGeneName = "c", vFamilyName = "c", dFamilyName = "c", 
+                jFamilyName = "c", sequenceStatus = "c", estimatedNumberGenomes = "i")
+    } else if (all(adaptiveV4 %in% columns)) {
+        file_type <- "adaptiveV4"
+        header_list <- cols_only(`nucleotide.CDR3.in.lowercase.` = col_character(), 
+                `aminoAcid.CDR3.in.lowercase.` = col_character(), cloneCount = col_integer(), 
+                `clonefrequency....` = col_double(), vGene = col_character(), dGene = col_character(), 
+                jGene = col_character(), fuction = col_character())
+    } else if (all(bgiClone %in% columns)) {
+        file_type <- "bgiClone"
+        header_list <- cols_only(`nucleotide(CDR3 in lowercase)` = col_character(), 
+                `aminoAcid(CDR3 in lowercase)` = col_character(), cloneCount = col_integer(), 
+                `clonefrequency (%)` = col_double(), vGene = col_character(), 
+                dGene = col_character(), jGene = col_character(), fuction = col_character())
+    }
+    ret_val <- list(file_type, header_list)
+    return(ret_val)
+}
+
+getStandard <- function(file_type) {
+    adaptiveV1 <- c(count = "count (reads)", frequencyCount = "frequencyCount (%)",
+            `function` = "sequenceStatus")
+
+    adaptiveV2 <- c(count = "count (templates/reads)", frequencyCount = "frequencyCount (%)",
+            `function` = "sequenceStatus")
+
+    adaptiveV3 <- c(count = "count (templates)", frequencyCount = "frequencyCount (%)",
+            `function` = "sequenceStatus")
+
+    adaptiveV4 <- c(nucleotide = "nucleotide.CDR3.in.lowercase.", aminoAcid = "aminoAcid.CDR3.in.lowercase.", 
+            count = "cloneCount", frequencyCount = "clonefrequency....", vGeneName = "vGene", dGeneName = "dGene", 
+            jGeneName = "jGene", `function` = "fuction")   
+    
+    bgiClone <- c(nucleotide = "nucleotide(CDR3 in lowercase)", aminoAcid = "aminoAcid(CDR3 in lowercase)", 
+            count = "cloneCount", frequencyCount = "clonefrequency (%)", vGeneName = "vGene", dGeneName = "dGene", 
+            jGeneName = "jGene", `function` = "fuction")
+
+    type_hash <- list("adaptiveV1"=adaptiveV1, "adaptiveV2"=adaptiveV2, "adaptiveV3"=adaptiveV3, "adaptiveV4"=adaptiveV4,
+            "bgiClone"=bgiClone)
+    return(type_hash[[file_type]])
+}
+
+readFiles <- function(clone_file) {
+    file_info <- getFileType(clone_file)
+    file_type <- file_info[[1]]
+    header_list <- file_info[[2]]
+    col_std <- getStandard(file_type)
+    col_old = header_list
+    file_names <- tools::file_path_sans_ext(basename(clone_file))
+    clone_frame <- readr::read_tsv(clone_file, col_types = col_old,
+                                    na = c("", "NA", "Nan", "NaN"), trim_ws = TRUE,
+                                    progress = show_progress())
+    if ((file_type == "adaptiveV1") | (file_type == "adaptiveV2") | (file_type == "adaptiveV3")){
+        clone_frame <- clone_frame %>% dplyr::rename(!!!col_std)
+        clone_frame <- clone_frame %>% mutate(`function`= str_replace(`function`, "In", "in-frame"))
+        clone_frame <- clone_frame %>% add_column(sample=file_names)
+    } else if ((file_type == "adaptiveV4") | (file_type == "bgiClone")) {
+        clone_frame <- clone_frame %>% dplyr::rename(!!!col_std)
+        clone_frame <- clone_frame %>% extract(nucleotide, c("nucleotide"), regex = "([acgt]+)")
+        clone_frame <- clone_frame %>% mutate(nucleotide  = toupper(nucleotide))
+        clone_frame <- clone_frame %>% extract(aminoAcid, c("aminoAcid"), regex = "([acdefghiklmnpqrstvwy]+)")
+        clone_frame <- clone_frame %>% mutate(aminoAcid = toupper(aminoAcid))
+        clone_frame <- clone_frame %>% separate(vGeneName, c("vFamilyName"), sep = '-', remove = FALSE)
+        clone_frame <- clone_frame %>% separate(dGeneName, c("dFamilyName"), sep = '-', remove = FALSE)
+        clone_frame <- clone_frame %>% separate(jGeneName, c("jFamilyName"), sep = '-', remove = FALSE)
+        clone_frame <- clone_frame %>% add_column(sample=file_names)
+
+        clone_frame <- clone_frame %>% group_by(nucleotide) %>% 
+            summarize(aminoAcid = first(aminoAcid), `count` = sum(`count`), vGeneName = first(vGeneName), `function` = first(`function`),
+            jGeneName = first(jGeneName), dGeneName = first(dGeneName), vFamilyName = first(vFamilyName), dFamilyName = first(dFamilyName),
+            jFamilyName = first(jFamilyName)) %>% mutate(frequencyCount = `count` / sum(`count`))
+        clone_frame <- clone_frame %>% mutate(estimatedNumberGenomes=`count`)        
+    }
     return(clone_frame)
 }
 
-readImmunoSeq <- function(path, mode="adaptiveV2", recursive = FALSE) {
+
+
+readImmunoSeq <- function(path, recursive = FALSE) {
     file.paths1 <- list.files(path, full.names = TRUE, all.files = FALSE, 
                              recursive = recursive, pattern = ".tsv", 
                              include.dirs = FALSE)
@@ -189,34 +228,11 @@ readImmunoSeq <- function(path, mode="adaptiveV2", recursive = FALSE) {
     if(!identical(file.paths1,file.paths2)){
         warning("One or more of the files you are trying to import has no sequences and will be ignored.", call. = FALSE)
     }
-
-    if (mode == "adaptiveV2") {
-        file.list <- suppressWarnings(plyr::llply(file.paths2, readAdaptiveV2, .progress = "text"))    
-    } else if  (mode == "adaptiveV3") {
-        file.list <- suppressWarnings(plyr::llply(file.paths2, readAdaptiveV3, .progress = "text"))    
-    } else if (mode == "bgiClone") {
-        file.list <- suppressWarnings(plyr::llply(file.paths2, readBGIclone, .progress = "text"))    
-    } else if (mode == "adaptiveV1") {
-        file.list <- suppressWarnings(plyr::llply(file.paths2, readAdaptiveV1, .progress = "text"))    
-    }
-    else if (mode == "adaptiveV4") {
-        file.list <- suppressWarnings(plyr::llply(file.paths2, readAdaptiveV4, .progress = "text"))    
-    }
+    file.list <- suppressWarnings(plyr::llply(file.paths2, readFiles, .progress = "text"))
     if(length(unique(plyr::llply(file.list, ncol))) > 1){
         warning("One or more of the files you are trying to import do not contain all the columns you specified.", call. = FALSE)
     }
     file.names <- gsub(".tsv", "", basename(file.paths2))
     names(file.list) <- file.names
-    i <- 1
-    for (i in 1:length(file.list)) {
-        colnames(file.list[[i]]) <- ifelse(grepl("frequencyCount*", 
-                                                 colnames(file.list[[i]])), 
-                                           "frequencyCount", 
-                                           colnames(file.list[[i]]))
-        colnames(file.list[[i]]) <- ifelse(grepl("count*", 
-                                                 colnames(file.list[[i]])), 
-                                           "count", 
-                                           colnames(file.list[[i]]))
-    }
     return(file.list)
 } 
