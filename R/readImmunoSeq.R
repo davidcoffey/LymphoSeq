@@ -104,7 +104,7 @@
 #' @importFrom data.table fread
 #' @importFrom plyr llply 
 #' @import tidyverse
-library(tidyverse)
+
 getFileType <- function(clone_file) {
     adaptiveV1 <- c("nucleotide", "aminoAcid", "count (reads)", "frequencyCount (%)", "vGeneName", 
         "dGeneName", "jGeneName", "vFamilyName", "dFamilyName", "jFamilyName", "sequenceStatus", 
