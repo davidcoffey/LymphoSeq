@@ -46,7 +46,7 @@
 #'          
 #' @export
 #' @import ggtree
-#' @import ggplot
+#' @import ggplot2
 #' @importFrom phangorn NJ
 phyloTree <- function(list, sample, type = "nucleotide", layout = "rectangular", label = TRUE) {
     file <- list[[sample]]
