@@ -74,20 +74,20 @@ geneFreq <- function(productive.nt, locus = "VDJ", family = FALSE) {
             d <- data.frame()
             j <- data.frame()
             if (grepl("V|v", locus)) {
-                v <- aggregate(count ~ vGene, data = file, FUN = sum)
-                v <- data.frame(samples = name[i], geneName = v$vGene, 
+                v <- aggregate(count ~ vGeneName, data = file, FUN = sum)
+                v <- data.frame(samples = name[i], geneName = v$vGeneName, 
                                 count = v$count, 
                                 frequencyGene = v$count/sum(v$count) * 100)
             }
             if (grepl("D|d", locus)) {
-                d <- aggregate(count ~ dGene, data = file, FUN = sum)
-                d <- data.frame(samples = name[i], geneName = d$dGene, 
+                d <- aggregate(count ~ dGeneName, data = file, FUN = sum)
+                d <- data.frame(samples = name[i], geneName = d$dGeneName, 
                                 count = d$count, 
                                 frequencyGene = d$count/sum(d$count) * 100)
             }
             if (grepl("J|j", locus)) {
-                j <- aggregate(count ~ jGene, data = file, FUN = sum)
-                j <- data.frame(samples = name[i], geneName = j$jGene, 
+                j <- aggregate(count ~ jGeneName, data = file, FUN = sum)
+                j <- data.frame(samples = name[i], geneName = j$jGeneName, 
                                 count = j$count, 
                                 frequencyGene = j$count/sum(j$count) * 100)
             }
@@ -103,20 +103,20 @@ geneFreq <- function(productive.nt, locus = "VDJ", family = FALSE) {
             d <- data.frame()
             j <- data.frame()
             if (grepl("V|v", locus)) {
-                v <- aggregate(count ~ vFamily, data = file, FUN = sum)
-                v <- data.frame(samples = name[i], familyName = v$vFamily, 
+                v <- aggregate(count ~ vFamilyName, data = file, FUN = sum)
+                v <- data.frame(samples = name[i], familyName = v$vFamilyName, 
                                 count = v$count, 
                                 frequencyGene = v$count/sum(v$count) * 100)
             }
             if (grepl("D|d", locus)) {
-                d <- aggregate(count ~ dFamily, data = file, FUN = sum)
-                d <- data.frame(samples = name[i], familyName = d$dFamily, 
+                d <- aggregate(count ~ dFamilyName, data = file, FUN = sum)
+                d <- data.frame(samples = name[i], familyName = d$dFamilyName, 
                                 count = d$count, 
                                 frequencyGene = d$count/sum(d$count) * 100)
             }
             if (grepl("J|j", locus)) {
-                j <- aggregate(count ~ jFamily, data = file, FUN = sum)
-                j <- data.frame(samples = name[i], familyName = j$jFamily, 
+                j <- aggregate(count ~ jFamilyName, data = file, FUN = sum)
+                j <- data.frame(samples = name[i], familyName = j$jFamilyName, 
                                 count = j$count, 
                                 frequencyGene = j$count/sum(j$count) * 100)
             }
