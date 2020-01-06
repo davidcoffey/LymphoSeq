@@ -83,7 +83,7 @@ alignSeq = function(list, sample = NULL, sequence = NULL, editDistance = 15, out
     if(!is.null(sequence)){
         names(string) <- paste(file$sample)
     } else {
-        names(string) <- paste(file$vFamily, file$dFamily, file$jFamily, file$count)
+        names(string) <- paste(file$vFamilyName, file$dFamilyName, file$jFamilyName, file$count)
     }
         names(string) <- gsub(names(string), pattern = "IGH|IGL|IGK|TCRB|TCRA", replacement = "")
         names(string) <- gsub(names(string), pattern = "unresolved", replacement = "UNR")
