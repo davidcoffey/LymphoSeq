@@ -4,8 +4,14 @@
 \alias{commonSeqsBar}
 \title{Common sequences bar plot}
 \usage{
-commonSeqsBar(productive.aa, samples, color.sample = NULL,
-  color.intersection = NULL, color = "#377eb8", labels = "no")
+commonSeqsBar(
+  productive.aa,
+  samples,
+  color.sample = NULL,
+  color.intersection = NULL,
+  color = "#377eb8",
+  labels = "no"
+)
 }
 \arguments{
 \item{productive.aa}{A list data frames of of productive amino acid sequences 

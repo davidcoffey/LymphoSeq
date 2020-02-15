@@ -14,8 +14,9 @@ Imports: data.table, plyr, dplyr, reshape, VennDiagram, ggplot2, ineq,
         phangorn, stringdist, UpSetR
 License: Artistic-2.0
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 Suggests: knitr, pheatmap, wordcloud, rmarkdown
 VignetteBuilder: knitr
 biocViews: Software, Technology, Sequencing, TargetedResequencing, Alignment, MultipleSequenceAlignment
 NeedsCompilation: no
+Encoding: UTF-8

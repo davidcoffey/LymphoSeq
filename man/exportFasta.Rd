@@ -4,8 +4,7 @@
 \alias{exportFasta}
 \title{Export sequences in fasta format}
 \usage{
-exportFasta(list, type = "nucleotide", names = c("rank", "aminoAcid",
-  "count"))
+exportFasta(list, type = "nucleotide", names = c("rank", "aminoAcid", "count"))
 }
 \arguments{
 \item{list}{A list of data frames consisting of antigen receptor sequences 
