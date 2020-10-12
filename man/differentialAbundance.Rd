@@ -4,9 +4,16 @@
 \alias{differentialAbundance}
 \title{Differential abundance analysis}
 \usage{
-differentialAbundance(sample1, sample2, list,
-  abundance = "estimatedNumberGenomes", type = "aminoAcid", q = 1,
-  zero = 0.001, parallel = FALSE)
+differentialAbundance(
+  sample1,
+  sample2,
+  list,
+  abundance = "estimatedNumberGenomes",
+  type = "aminoAcid",
+  q = 1,
+  zero = 0.001,
+  parallel = FALSE
+)
 }
 \arguments{
 \item{sample1}{A character vector indicating the name of the first sample in the list

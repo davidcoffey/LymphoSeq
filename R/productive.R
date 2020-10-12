@@ -28,8 +28,7 @@
 #' @export
 #' @importFrom stats aggregate
 productive <- function(sample, aggregate = "aminoAcid") {
-    productive.seqs <- sample[which(sample[, "aminoAcid"] != "" &
-                                        !grepl("\\*", sample[, "aminoAcid"])), ]
+    productive.seqs <- sample[which(sample[, "function"] == "in-frame"), ]
     if(nrow(productive.seqs) != 0){
         if (any(grepl("estimatedNumberGenomes", colnames(productive.seqs)))) {
             if (aggregate == "aminoAcid") {

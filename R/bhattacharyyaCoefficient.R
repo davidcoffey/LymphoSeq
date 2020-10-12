@@ -22,6 +22,8 @@
 #' @seealso \code{\link{bhattacharyyaMatrix}}
 #' @export
 bhattacharyyaCoefficient <- function(sample1, sample2) {
+    sample1 <- data.frame(sample1)
+    sample2 <- data.frame(sample2)
     p <- sample1[which(sample1[, "aminoAcid"] %in% sample2[, "aminoAcid"]), ]
     p$frequencyCount <- p$frequencyCount/100
     q <- sample2[which(sample2[, "aminoAcid"] %in% sample1[, "aminoAcid"]), ]

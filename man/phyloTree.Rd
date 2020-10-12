@@ -4,8 +4,13 @@
 \alias{phyloTree}
 \title{Create phylogenetic tree}
 \usage{
-phyloTree(list, sample, type = "nucleotide", layout = "rectangular",
-  label = TRUE)
+phyloTree(
+  list,
+  sample,
+  type = "nucleotide",
+  layout = "rectangular",
+  label = TRUE
+)
 }
 \arguments{
 \item{list}{A list data frames of unproductive nucleotide sequences or productive 

@@ -4,8 +4,15 @@
 \alias{alignSeq}
 \title{Align mutliple sequences}
 \usage{
-alignSeq(list, sample = NULL, sequence = NULL, editDistance = 15,
-  output = "console", type = "nucleotide", method = "ClustalOmega")
+alignSeq(
+  list,
+  sample = NULL,
+  sequence = NULL,
+  editDistance = 15,
+  output = "console",
+  type = "nucleotide",
+  method = "ClustalOmega"
+)
 }
 \arguments{
 \item{list}{A list of data frames consisting of antigen receptor sequences 

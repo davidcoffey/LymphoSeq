@@ -31,6 +31,7 @@ mergeFiles <- function(samples, file.list) {
     i <- 1
     for (i in 1:length(samples)) {
         file <- file.list[[as.character(samples[i])]]
+        file <- data.frame(file)
         merged <- rbind(merged, file)
     }
     count <- aggregate(count ~ nucleotide, data = merged, FUN = sum)
